@@ -63,3 +63,4 @@ Product Owner: Hussam.
 
 - 🎨 Login & Register Wireframe (Figma):
   https://www.figma.com/proto/3ft0gPTM4WfGumH8JpzH7n/Untitled?node-id=0-1&t=BUAI6a2jbL8vpNCs-1
+

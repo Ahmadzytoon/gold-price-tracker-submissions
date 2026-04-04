@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="../assets/icons/unlock_icon_129431.ico" rel="icon" />
+    <link rel="stylesheet" href="../main.css" />
+
+    <style>
+      .main-section {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        padding: 2rem 0;
+      }
+
+      .card {
+        border: 1px solid rgba(243, 198, 35, 0.2);
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(15px);
+        margin: 0 15px;
+        filter: drop-shadow(0 0 25px rgba(243, 198, 35, 0.3));
+        border: 1px solid rgba(243, 198, 35, 0.3);
+        box-shadow: 0 10px 40px rgba(243, 198, 35, 0.15);
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        transition: 0.3s;
+      }
+      .text-navy {
+        color: var(--navy-deep) !important;
+      }
+
+      .text-orange {
+        color: var(--orange-main) !important;
+      }
+      h2 {
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px rgba(243, 198, 35, 0.3);
+      }
+      .form-outline .form-control:focus ~ .form-label {
+        color: var(--orange-main) !important;
+      }
+
+      .gender-select {
+        border: none;
+        border-bottom: 1px solid #bdbdbd;
+        padding: 0.6rem 0.5rem;
+        background-color: transparent;
+        color: var(--navy-deep);
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23EB8317'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.5rem center;
+        background-size: 1.5rem;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .error-msg {
+        font-size: 0.75rem;
+        min-height: 18px;
+        margin-top: -15px;
+        margin-bottom: 10px;
+        padding-left: 5px;
+        color: #d32f2f;
+      }
+
+      .form-outline i {
+        color: var(--orange-main) !important;
+      }
+
+      @media (max-width: 768px) {
+        .card-body {
+          padding: 2rem !important;
+        }
+      }
+
+      @media (max-width: 576px) {
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        .main-section {
+          padding: 1rem 0;
+        }
+        .card {
+          border-radius: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="main-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-5">
+              <div class="card-body p-4 p-md-5">
+                <h2
+                  class="text-center mb-4 mb-md-5 text-navy fw-bold text-uppercase"
+                >
+                  Login
+                </h2>
+
+                <form id="form">
+                  <div class="form-outline mb-2" data-mdb-input-init>
+                    <i class="fas fa-envelope trailing"></i>
+                    <input
+                      type="email"
+                      id="regEmail"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="regEmail"
+                      >Email Address</label
+                    >
+                  </div>
+                  <div id="emailError" class="text-danger small mb-1"></div>
+                  <div class="form-outline mb-2" data-mdb-input-init>
+                    <i class="fas fa-lock trailing"></i>
+                    <input
+                      type="password"
+                      id="regPassword"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="regPassword">Password</label>
+                  </div>
+                  <div id="passwordError" class="text-danger small mb-1"></div>
+
+                  <button
+                    type="submit"
+                    class="btn btn-register btn-block btn-lg text-uppercase"
+                  >
+                    Sign in
+                  </button>
+                </form>
+                <div class="text-center mt-3">
+                  <p class="small text-muted">
+                    Do not have an account?
+                    <a href="register.html" class="fw-bold text-orange"
+                      >Sign up</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+    <script src="../javascript/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>
