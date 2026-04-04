@@ -12,7 +12,9 @@ A web application that tracks and visualises live gold prices, built as a collab
 | **Ibrahem Abu-Othman** | Product Owner |
 | **Shahed Al-Khraiasheh** | Developer |
 
-  and here is the link to our excel sheet that we did follow to make the project : https://1drv.ms/x/c/50476927A6B8A5BE/IQAOd4_wLbXsQKE-Ao5j3kMyAdNTohdVYdOkIxdqvEDEnvM
+  and here is the link to our excel sheet that we did follow to make the project : https://1drv.ms/x/c/50476927A6B8A5BE/IQAOd4_wLbXsQKEAo5j3kMyAdNTohdVYdOkIxdqvEDEnvM
+
+here is the link to figma wireframe : https://www.figma.com/design/M12n5vPpKJu5XbtUrP3rEs/Untitled?node-id=0-1&t=YUJqev3cnVDLkXdM-1
 ---
 
 
