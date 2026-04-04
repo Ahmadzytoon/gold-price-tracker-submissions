@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Asset - Live Gold</title>
+    <style>
+      body {
+        background: radial-gradient(
+          circle at center,
+          #a44a0a 0%,
+          #5a1f07 50%,
+          #2b0f05 100%
+        );
+        color: rgb(238, 210, 154);
+        font-family: initial;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(238, 210, 154, 0.2);
+        border-radius: 20px;
+        padding: 35px;
+        width: 350px;
+        backdrop-filter: blur(15px);
+        text-align: center;
+      }
+      h2 {
+        color: rgb(238, 210, 154);
+        text-transform: uppercase;
+        margin-bottom: 25px;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: 1px solid rgba(238, 210, 154, 0.2);
+        background: rgba(0, 0, 0, 0.3);
+        color: white;
+        font-weight: bold;
+      }
+      input:focus {
+        outline: none;
+        border-color: rgb(238, 210, 154);
+      }
+      .btn-save {
+        width: 100%;
+        padding: 12px;
+        background: rgb(238, 210, 154);
+        color: #2b0f05;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+      }
+      .back-link {
+        display: block;
+        margin-top: 20px;
+        color: rgb(238, 210, 154);
+        text-decoration: none;
+        font-size: 0.8rem;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>New Asset</h2>
+      <form id="goldForm">
+        <input type="text" id="name" placeholder="Asset Name" required />
+        <input
+          type="number"
+          id="weight"
+          placeholder="Weight (Grams)"
+          step="any"
+          required
+        />
+        <select id="karat" required>
+          <option value="" disabled selected>Select Karat</option>
+          <option value="24">24K</option>
+          <option value="21">21K</option>
+          <option value="18">18K</option>
+        </select>
+        <input type="date" id="buyDate" required />
+        <input
+          type="number"
+          id="price"
+          placeholder="Buy Price ($)"
+          step="any"
+          />
+        <small id="priceNote" style="display:block; margin-bottom: 15px; opacity:0.8;"></small>
+        <button type="submit" class="btn-save">Save Asset</button>
+        <a href="Assets.html" class="back-link">← Return to Portfolio</a>
+      </form>
+    </div>
+            <script src="./js/addassets.js"></script>
+  </body>
+</html>

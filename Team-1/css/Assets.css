@@ -1,0 +1,124 @@
+:root {
+  /* الألوان المعتمدة منك */
+  --main-gold: rgb(238, 210, 154);
+  --card-bg: rgba(255, 255, 255, 0.05);
+}
+
+body {
+  /* تطبيق تدرج البني اللي حددته */
+  background: radial-gradient(
+    circle at center,
+    #a44a0a 0%,
+    #5a1f07 50%,
+    #2b0f05 100%
+  );
+  color: var(--main-gold);
+  font-family: initial; /* الخط اللي طلبته */
+  font-weight: bold; /* الوزن اللي طلبته */
+  margin: 0;
+  min-height: 100vh;
+}
+
+header nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #ddd;
+}
+
+.logo {
+  color: #f5b75a;
+}
+.navbar {
+  background: transparent;
+}
+
+.nav-link {
+  color: #ddd !important;
+}
+
+.nav-link:hover {
+  color: #f5b75a !important;
+}
+
+.card-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  height: 100%;
+}
+
+.btn-gold {
+  background: linear-gradient(to right, #f5b75a, #d9921e);
+  border: none;
+  color: black;
+  font-weight: bold;
+}
+
+.btn-gold:hover {
+  opacity: 0.9;
+}
+
+.overview-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(238, 210, 154, 0.2);
+  border-radius: 24px;
+  padding: 40px;
+  margin: 30px 0 50px 0;
+  backdrop-filter: blur(10px);
+}
+
+.asset-square-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(238, 210, 154, 0.1);
+  border-radius: 24px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: 0.3s ease;
+}
+
+.asset-square-card:hover {
+  border-color: var(--main-gold);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.karat-badge {
+  color: var(--main-gold);
+  border: 1px solid var(--main-gold);
+  padding: 2px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+}
+
+.price-text {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  color: #fff;
+}
+.profit {
+  color: #00ff88;
+}
+.loss {
+  color: #ff4d4d;
+}
+
+.btn-add-assets {
+  background-color: var(--main-gold);
+  color: #2b0f05;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 10px 25px;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.form-control {
+  background: var(--card-bg);
+  border: 1px solid rgba(238, 210, 154, 0.2);
+  color: var(--main-gold);
+  font-weight: bold;
+}

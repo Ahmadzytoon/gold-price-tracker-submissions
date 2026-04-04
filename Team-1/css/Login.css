@@ -1,0 +1,73 @@
+body {
+  background: radial-gradient(
+    circle at center,
+    #a44a0a 0%,
+    #5a1f07 50%,
+    #2b0f05 100%
+  );
+  color: rgb(238, 210, 154);
+  font-family: initial;
+}
+
+h1 {
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+form {
+  width: 100%;
+  max-width: 400px;
+  padding: 25px;
+
+  border: 2px solid #aa7457;
+  border-radius: 20px;
+background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+input {
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(224, 181, 106, 0.6);
+}
+
+.custom-btn {
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(45deg, #d4a256, #b97d2f);
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+
+a {
+  color: rgb(238, 210, 154);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #c98c3a;
+}
+
+@media (min-width: 768px) {
+  form {
+    max-width: 450px;
+    padding: 30px;
+  }
+}
+
+@media (min-width: 992px) {
+  form {
+    max-width: 500px;
+    padding: 35px;
+  }
+}
