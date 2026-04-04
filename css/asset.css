@@ -1,0 +1,231 @@
+:root{
+--primary-color:#D4AF37;
+--secondary-color:#A6892E;
+--Tertiary-color:#9780FF;
+--Neutral-color:#121212;
+--darkGray-color:#1C1B1B;
+--lightGray-color:#2B2B2A;
+ --main-font: "Abel", sans-serif;
+ --white-color:#E5E2E1;
+}
+
+body{
+    background-color: var(--Neutral-color);
+    font-family: var(--main-font);
+}
+
+h1 {
+  font-size: 2.5rem;   
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;     
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.75rem;  
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.5rem;   
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.25rem;  
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 1rem;     
+  font-weight: 500;
+}
+
+p {
+  font-size: 1rem;     
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+
+button{
+    background-color: var(--primary-color);
+    color: var(--Neutral-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input{
+    background-color: var(--primary-color);
+    color: var(--Neutral-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: var(--secondary-color);
+}
+
+input:focus{
+    background-color:#353534;
+}
+
+
+
+/* this section for header */
+
+
+.header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo p{
+   color: var(--primary-color);
+   font-size: 40px;
+   font-weight: bolder;
+   letter-spacing: 5px;
+}
+.navlink a{
+    color: #D0C5AF;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0px 10px;
+}
+.currency{
+    background-color: #353534;
+    padding:8px ;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.currency button{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    background-color: #35353400;
+    color: wheat;
+    font-weight: bold;
+    padding: 0px 15px;
+}
+.currency .selected{
+    background-color: var(--primary-color);
+    color: black;
+    font-weight: bold;
+    padding: 0px 15px;
+}   
+.loginbutton{
+    background-color: #35353400;
+    color: white;
+    text-align: center;
+}
+.header i{
+    display: none;
+}
+
+/* this section for sidebar header */
+.sideheader{
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    justify-content: start;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    z-index: 999;
+    height: 100%;
+    background-color: #a6882e25;
+    gap: 50px;
+    width: 250px;
+    backdrop-filter: blur(5px);
+}
+.sideheader .navlink{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.sideheader .login{
+    display: flex;
+    flex-direction: column;
+}
+.sideheader .login{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.sideheader .loginbutton{
+    background-color: #D4AF37;
+    color: black;
+    width: 100%;
+    text-align: center;
+}
+@media (max-width:900px) {
+    .navlink, .login,.logout_div{
+        display: none;
+    }
+    .header i{
+        display: block;
+    }
+}
+
+
+
+/* this section for footer */
+
+.footer{
+    width: 100%;
+    margin-top: 40px;
+    padding: 20px 0;
+    background-color: #0d0d0d;
+    align-self: self-end;
+}
+
+.footer-content{
+    width: 90%;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    color: #777;
+}
+
+.links a{
+    margin: 0 10px;
+    color: #777;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.links a:hover{
+    color: #F2CA50;
+}
+
+.logo-yousef{
+    color: var(--primary-color);
+    font-size: 40px;
+    font-weight: bolder;
+    letter-spacing: 5px;
+}
+
+
+
+h3:hover,h6:hover , a:hover{
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+

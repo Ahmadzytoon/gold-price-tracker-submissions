@@ -1,0 +1,40 @@
+<nav>
+    <div id="side" class="sideheader">
+    <div class="logo"><p>KIRATY</p></div>
+    <div class="navlink">
+            <a href="/index.html">Home</a> 
+            <a href="/html/myAssets.html">My Assets</a> 
+            <a href="/html/news.html">News</a>
+    </div>
+    
+    <div class="login" id="login_resp">
+        <button class="loginbutton" onclick="window.location.href='/html/login.html'">Login</button>
+        <button onclick="window.location.href='/html/register.html'">CREATE ACCOUNT</button>
+    </div>
+    <div><button id="logout_resp" onclick="window.location.href='/index.html'" class="hide_button">Logout</button></div>
+    <div onclick=close_side(); id="menu_close"><i class="fa-solid fa-xmark fa-xl" style="color: rgb(255, 255, 255);"></i></div>
+</div>
+<div class="header">
+    <div class="logo"><p>KIRATY</p></div>
+    <div class="navlink">
+            <a href="/index.html">Home</a> |
+            <a href="/html/myAssets.html">My Assets</a> |
+            <a href="/html/news.html">News</a>
+    </div>
+    <div class="currency">
+        <button id="dollar" class="selected">USD</button>
+        <button id="jod">JOD</button>
+    </div>
+    <div class="show" id="show">
+        <div class="login" id="login">
+            <button class="loginbutton" onclick="window.location.href='/html/login.html'">Login</button>
+            <button onclick="window.location.href='/html/register.html'">CREATE ACCOUNT</button>
+        </div>
+
+        <!----->
+        
+    </div>
+    <div class="logout_div"><button id="logout" onclick="window.location.href='/index.html'" class="hide_button">Logout</button></div>
+    <div onclick=show_side(); id="menu" style="width:fit-content; height: fit-content;"><i class="fa-solid fa-bars fa-xl" style="color: rgb(255, 255, 255);"></i></div>
+</div>
+</nav>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        if(sessionStorage.getItem("isLoggedIn") === "true"){
+            window.location.href = "index.html";
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/asset.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="header" id="login-header">
+        <div class="logo"><p>KIRATY</p></div>
+        <div class="navlink">
+                <a href="/index.html">Home</a> |
+                <a href="/html/myAssets.html">My Assets</a> |
+                <a href="/html/news.html">News</a>
+        </div>
+    </div>
+    <div class="container">
+    <div class="body-card">
+        <div class="login-wrapper">
+            <div class="login-title">
+                <h1>Login</h1>
+            </div>
+            <form action=""  id="loginForm">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" placeholder="name@gmail.com">
+
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="********">
+                <hr>
+                <p>don't have an account? <a href="Register.html">Register</a></p>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+ <footer id="footer-placeholder"></footer>
+    <!-- <footer class="footer">
+    <div class="footer-content">
+        <p class="logo-yousef">KIRATY</p>
+
+        <div class="links">
+            <a href="https://github.com/AR92-Dev/gold-asset-tracker">Support</a>
+            <a href="https://github.com/AR92-Dev/gold-asset-tracker">Project Info</a>
+            <a href="https://github.com/AR92-Dev/gold-asset-tracker">Privacy Policy</a>
+        </div>
+
+        <span>© 2026 All Rights Reserved</span>
+    </div>
+</footer> -->
+    <script src="../js/auth.js"></script>
+    
+</body>
+
+</html>

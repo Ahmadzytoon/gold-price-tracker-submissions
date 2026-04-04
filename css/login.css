@@ -1,0 +1,283 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    background-color: #131313;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #0f1f1c, #131313, #1a1a1a);
+    min-height: 100vh;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+    padding: 20px;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-top: 0px;
+
+}
+
+.login-title{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #F2CA50;
+}
+
+hr{
+    width: 100%;
+    border: 1px solid #F2CA50;
+    margin: 20px 0;
+}
+
+.brand-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding: 30px 10px 10px;
+    width: 100%;
+}
+
+#login-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px 10px;
+    position: relative;
+}
+
+#login-header .logo {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+}
+
+#login-header .navlink {
+    display: block !important;
+    text-align: center;
+}
+
+
+.brand-title h1{
+    padding: 5px;
+    color: #F2CA50;
+    letter-spacing: 10px;  
+}
+
+.brand-title h6{
+    padding: 5px;
+    color: #D0C5AF;
+    word-spacing: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+.body-card{
+    background-color: #1C1B1B;
+    display: flex;
+    width: 400px;
+    max-width: 90%;
+    min-height: 20vh;
+    justify-content: flex-start; 
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+  box-shadow: 
+        0 20px 40px rgba(0,0,0,0.6),
+        0 0 20px rgba(0, 255, 150, 0.05);    padding: 60px 30px;   
+    border-left: 3px solid #F2CA50;
+    background: linear-gradient(145deg, #1C1B1B, #111);
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+}
+
+input{
+    background-color: #353534;
+    color: #D0C5AF;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    width: 100%;
+}
+
+button{
+    background-color: #F2CA50;
+    color: #1C1B1B;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    font-weight: bold;
+}
+
+a{
+    color: #F2CA50;
+    text-decoration: none;
+}
+
+p{
+    color: #D0C5AF;
+    align-self: center;
+    margin: 10px 0;
+}
+
+
+label{
+    color: #D0C5AF;
+    margin: 10px 0;
+}
+
+
+.footer{
+    width: 100%;
+    padding: 20px 0;
+    background-color: #0d0d0d;
+}
+
+.footer-content{
+    width: 90%;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    color: #777;
+}
+
+.links a{
+    margin: 0 10px;
+    color: #777;
+    font-size: 14px;
+}
+
+.links a:hover{
+    color: #F2CA50;
+}
+
+
+@media screen and (max-width: 768px) {
+    #login-header {
+        flex-direction: column;
+        padding-top: 20px;
+    }
+    #login-header .logo {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+    }
+
+    .body-card {
+        width: 85%;
+        padding: 40px 20px;
+    }
+
+    .brand-title h1 {
+        font-size: 28px;
+        letter-spacing: 5px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .body-card {
+        width: 95%;
+        padding: 30px 15px;
+        border-radius: 15px;
+    }
+
+    .brand-title h1 {
+        font-size: 24px;
+        letter-spacing: 3px;
+    }
+
+    input {
+        padding: 12px 15px;
+    }
+
+    button {
+        padding: 12px 0;
+    }
+}
+
+#footer-placeholder{
+    width: 100%;
+}
+
+#header-placeholder{
+    width: 100%;
+}
+
+.login_nav{
+    display: none;
+}
+.hide_button{
+    display: none;
+}
+
+.currency{
+    display: none;
+}
+
+.sideheader{
+    width: 100%;
+    display: flex;
+    /* justify-content: space-between; */
+
+}
+
+nav{
+    width: 100%;
+}
+
+.navlink{
+    justify-self: center;
+}
+
+.logo{
+    justify-self: flex-start;
+} 
