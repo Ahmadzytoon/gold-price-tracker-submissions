@@ -1,1 +1,1 @@
-# gold-price-tracker-submissions
+# Gold

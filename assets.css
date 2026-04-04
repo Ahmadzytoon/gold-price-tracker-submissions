@@ -1,0 +1,468 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ede7c4;
+}
+
+/* ── Form Container ── */
+.form-container {
+    max-width: 750px;
+    width: 90%;
+    margin: 30px auto;
+    padding: 25px 20px;
+    background-color: #cdb899;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #674019;
+}
+
+@media (min-width: 480px) {
+    .form-container {
+        padding: 30px 30px;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-container {
+        padding: 30px 40px;
+        margin: 50px auto;
+    }
+}
+
+h2 {
+    color: #674019;
+    margin: 0 0 25px 0;
+    padding: 0;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    h2 {
+        font-size: 28px;
+        margin: 0 0 35px 0;
+    }
+}
+
+/* ── Form Group ── */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 600px) {
+    .form-group {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 18px;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-group {
+        grid-template-columns: 180px 1fr;
+    }
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #674019;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+@media (min-width: 600px) {
+    .form-group label {
+        padding-right: 15px;
+        font-size: 16px;
+    }
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #674019;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #674019;
+    background-color: #fffaf0;
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    input,
+    select {
+        font-size: 16px;
+    }
+}
+
+/* ── Save Button ── */
+#saveBtn {
+    display: block;
+    margin: 25px auto 10px auto;
+    width: 60%;
+    padding: 13px;
+    background: linear-gradient(135deg, #e0b84e, #c99330);
+    box-shadow: 0 4px 16px rgba(180, 130, 40, 0.3);
+    color: #222;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+@media (min-width: 480px) {
+    #saveBtn {
+        width: 50%;
+        font-size: 17px;
+    }
+}
+
+@media (min-width: 768px) {
+    #saveBtn {
+        width: 40%;
+        margin: 30px auto 10px auto;
+    }
+}
+
+#saveBtn:hover {
+    background-color: #b8962e;
+}
+
+/* ── Hero Section ── */
+.heroSection {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+}
+
+@media (min-width: 480px) {
+    .heroSection {
+        height: 55vh;
+    }
+}
+
+@media (min-width: 768px) {
+    .heroSection {
+        height: 76vh;
+    }
+}
+
+/* ── Search / Filter Bar ── */
+.searchAssets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-bottom: 2px solid #674019;
+    box-shadow: 2px 1px 10px #674019;
+}
+
+@media (min-width: 768px) {
+    .searchAssets {
+        justify-content: space-around;
+        padding: 20px;
+        flex-wrap: nowrap;
+    }
+}
+
+#search-input {
+    flex: 1 1 100%;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #d4af37;
+    border-radius: 5px;
+    color: #674019;
+    background-color: #b8962e;
+    height: 46px;
+    font-size: 15px;
+}
+
+@media (min-width: 480px) {
+    #search-input {
+        flex: 1 1 55%;
+    }
+}
+
+@media (min-width: 768px) {
+    #search-input {
+        width: 60%;
+        flex: none;
+        height: 50px;
+    }
+}
+
+#add-asset-btn {
+    color: #674019;
+    background: linear-gradient(135deg, #e0b84e, #c99330);
+    box-shadow: 0 4px 16px rgba(180, 130, 40, 0.3);
+    flex: 1 1 calc(50% - 5px);
+    height: 46px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    #add-asset-btn {
+        width: 20%;
+        flex: none;
+        height: 50px;
+        margin-left: 20px;
+        font-size: 15px;
+    }
+}
+
+#type-btn {
+    color: #674019;
+    background-color: #b8962e;
+    flex: 1 1 calc(50% - 5px);
+    height: 46px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    #type-btn {
+        width: 20%;
+        flex: none;
+        height: 50px;
+        margin-left: 20px;
+    }
+}
+
+#searchKarat {
+    color: #b8962e;
+    background-color: #674019;
+    flex: 1 1 calc(50% - 5px);
+    height: 46px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    #searchKarat {
+        width: 20%;
+        flex: none;
+        height: 50px;
+        margin-left: 20px;
+    }
+}
+
+#searchType {
+    color: #b8962e;
+    background-color: #674019;
+    flex: 1 1 calc(50% - 5px);
+    height: 46px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    #searchType {
+        width: 20%;
+        flex: none;
+        height: 50px;
+        margin-left: 20px;
+    }
+}
+
+/* ── Validation ── */
+#dateError {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.error-message {
+    display: block;
+    color: red;
+    font-weight: bold;
+}
+
+/* ── Asset Cards Grid ── */
+#assetList {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+}
+
+@media (min-width: 480px) {
+    #assetList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    #assetList {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #assetList {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ── Gold Card ── */
+.gold-card {
+    border: 1px solid #674019;
+    padding: 16px;
+    border-radius: 10px;
+    background-color: #cdb899;
+    box-shadow: 2px 1px 10px #674019;
+}
+
+@media (min-width: 768px) {
+    .gold-card {
+        padding: 20px;
+    }
+}
+
+.gold-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: over;
+    border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+    .gold-card img {
+        height: 200px;
+    }
+}
+
+.gold-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #674019;
+}
+
+@media (min-width: 768px) {
+    .gold-card h3 {
+        font-size: 20px;
+    }
+}
+
+.gold-card p {
+    font-size: 14px;
+    color: #674019;
+}
+
+@media (min-width: 768px) {
+    .gold-card p {
+        font-size: 16px;
+    }
+}
+
+.gold-card a {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #674019;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    .gold-card a {
+        padding: 10px 20px;
+    }
+}
+
+.gold-card a:hover {
+    background-color: #b8962e;
+}
+
+.delete-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #674019;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    .delete-btn {
+        padding: 10px 20px;
+    }
+}
+
+/* ── Profit / Loss Badge ── */
+.profit-loss {
+    margin: 10px 0;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    .profit-loss {
+        font-size: 16px;
+    }
+}
+
+.profit-loss.profit {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.profit-loss.loss {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.profit-loss.neutral {
+    background-color: #e2e3e5;
+    color: #383d41;
+    font-size: 13px;
+}
+
+.profit-loss small {
+    font-weight: normal;
+    font-size: 12px;
+}

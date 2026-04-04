@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
+  <script src="goldPrices.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="news.js" defer></script>
+  <script src="darkMode.js" defer></script>
+  <title>Gold Price Tracker Web App</title>
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main>
+    <div class="container mt-4">
+
+      <!-- Live price + chart -->
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="price-card">
+            <h6>Live Gold Price</h6>
+            <h2 id="ounce-price">Loading...</h2>
+            <p id="ounce-price-sub"></p>
+            <small id="last-updated"></small>
+            <div class="mt-3">
+              <button class="btn btn-sm btn-outline-warning" id="currency-toggle">USD</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-8">
+          <div class="chart-card">
+            <h6>Gold Price Chart (Last 30 Days)</h6>
+            <canvas id="priceChart" height="120"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rate cards -->
+      <div class="mt-3 ">
+        <h5 class="mb-3">Gold Rates</h5>
+        <div class="d-flex flex-wrap gap-2">
+
+          <div class="rate-card">
+            <div class="rate-label">24K Gold</div>
+            <div class="rate-value" id="price-24k">-</div>
+            <small>per gram</small>
+          </div>
+
+          <div class="rate-card">
+            <div class="rate-label">21K Gold</div>
+            <div class="rate-value" id="price-21k">-</div>
+            <small>per gram</small>
+          </div>
+
+          <div class="rate-card ">
+            <div class="rate-label">18K Gold</div>
+            <div class="rate-value" id="price-18k">-</div>
+            <small>per gram</small>
+          </div>
+
+          <div class="rate-card">
+            <div class="rate-label"><img src="/media/rishadi-removebg-preview.png" width="30px"> Rashadi</div>
+            <div class="rate-value" id="price-rashadi">-</div>
+          </div>
+
+          <div class="rate-card">
+            <div class="rate-label"><img src="/media/enflish-removebg-preview.png" width="30px"> English</div>
+            <div class="rate-value" id="price-english">-</div>
+          </div>
+
+          <div class="rate-card">
+            <div class="rate-label"><img src="/media/bargold.png" width="30px"> Gold Bar</div>
+            <div class="rate-value" id="price-bar">-</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- News section -->
+    <div class="container mt-5 mb-5">
+      <div class="d-flex align-items-center gap-3 mb-4">
+        <h5 class="news-section-title mb-0">Latest Gold News</h5>
+        <div class="news-title-line"></div>
+      </div>
+      <div class="row g-3" id="news-cards-container">
+        <div class="col-12 col-md-4"><div class="news-card-skeleton"></div></div>
+        <div class="col-12 col-md-4"><div class="news-card-skeleton"></div></div>
+        <div class="col-12 col-md-4"><div class="news-card-skeleton"></div></div>
+      </div>
+    </div>
+    <script>
+    
+  function loadLatestNewsCards() {
+  const container = document.getElementById("news-cards-container");
+  const savedNews = localStorage.getItem("goldNews");
+
+  if (!savedNews) {
+    return;
+  }
+
+  const fallbackImages = [
+
+    "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600",
+  ];
+
+  function getRandomFallback() {
+    return fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
+  }
+
+  const articles = JSON.parse(savedNews).slice(0, 3);
+
+  if (articles.length === 0) {
+    container.innerHTML = `<div class="col-12 text-center text-muted">No news available.</div>`;
+    return;
+  }
+
+  container.innerHTML = articles.map(a => `
+    <div class="col-12 col-md-4">
+      <a href="${a.url}" target="_blank" class="text-decoration-none">
+        <div class="news-card h-100">
+          <img src="${a.image}" alt="${a.title}" 
+               class="w-100" 
+               style="height:180px; object-fit:cover; border-radius:8px 8px 0 0;"
+               onerror="this.src='/media/fallbackImge.avif'">
+          <div class="p-3">
+            <h6 class="news-card-title">${a.title}</h6>
+            <div class="news-card-time text-muted small mt-2">
+              ${new Date(a.publishedAt).toLocaleString()}
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  `).join("");
+}
+loadLatestNewsCards()
+
+    </script>
+  </main>
+
+  <div id="footer-placeholder"></div>
+<script>
+  const CURRENT_PAGE = window.location.pathname;
+</script>
+</body>
+</html>

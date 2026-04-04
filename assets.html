@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="darkMode.js" defer></script>
+
+    <title>Assets Page </title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="assets.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="header-placeholder"></div>
+
+    <img src="images\bKC5A.jpg" class="heroSection" alt="Gold Image for the hero section ">
+
+
+    <div class="searchAssets">
+      <input type="text" id="searchInput" placeholder="Search by category">
+
+        <select id="searchKarat" required>
+            <option value="all">All Karat</option>
+            <option value="24K">24K (Pure)</option>
+            <option value="22K">22K</option>
+            <option value="21K">21K</option>
+            <option value="18K">18K</option>
+            <option value="14K">14K</option>
+        </select>
+
+        <select id="searchType" required>
+            <option value="all">All Types</option>
+            <option value="Jewelry">Jewelry</option>
+            <option value="Bars">Bars</option>
+            <option value="Coins">Coins</option>
+        </select>
+
+        <button id="add-asset-btn"><i class="fa-solid fa-circle-plus"
+                style="margin-right: 5px;  background-color: #b8962e;"></i> Add New Asset</button>
+    </div>
+
+
+    <!-- ✅ Changed from <form> to <div> — forms cannot be nested -->
+    <div class="addAssets hidden">
+
+        <div class="form-container">
+            <h2>Add New Gold Asset</h2>
+            <form id="assetForm">
+              
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select id="assetType" required>
+                        <option value="">choose type of asset</option>
+                        <option value="Jewelry">Jewelry</option>
+                        <option value="Bars">Bars</option>
+                        <option value="Coins">Coins</option>
+                    </select>
+                    <span id="assetTypeError" class="error-message" style="color:red; display:none;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="karat">Karat</label>
+                    <select id="karat" required>
+                        <option value="">choose karat</option>
+                        <option value="24K">24K (Pure)</option>
+                        <option value="22K">22K</option>
+                        <option value="21K">21K</option>
+                        <option value="18K">18K</option>
+                        <option value="14K">14K</option>
+                    </select>
+                    <span id="karatError" class="error-message" style="color:red; display:none;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" id="category" placeholder="e.g. Ring, Necklace, Bullion" required>
+                    <span id="categoryError" class="error-message" style="color:red; display:none;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="weight">Weight (grams)</label>
+                    <input type="number" id="weight" step="0.01" placeholder="0.00" min="0" required>
+                    <span id="weightError" class="error-message" style="color:red; display:none;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Purchase Price</label>
+                    <input type="number" id="price" step="0.01" min="0" placeholder="Amount Paid" required>
+                    <span id="priceError" class="error-message" style="color:red; display:none;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Purchase Date</label>
+                    <input type="date" id="date" required>
+                    <span id="dateError" class="error-message" style="color:red; display:none;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Asset Image</label>
+                    <input type="file" id="image" accept="image/*" required>
+                    <span id="imageError" class="error-message" style="color:red; display:none;"></span>
+                </div>
+
+                <button type="submit" id="saveBtn">Save Asset</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="assetList">
+
+
+    </div>
+     <div id="footer-placeholder"></div>
+
+
+    <script src="assets.js"></script>
+
+</body>
+
+</html>
