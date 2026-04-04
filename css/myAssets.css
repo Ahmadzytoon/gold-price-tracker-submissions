@@ -1,0 +1,262 @@
+:root {
+    --profit-green: #27ae60;
+    --loss-red: #e74c3c;
+}
+
+/* ── NAVBAR CURRENCY TOGGLE ── */
+.nav-currency-toggle {
+    display: flex;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    height: 34px;
+}
+
+.nav-currency-toggle .ctoggle {
+    padding: 0 14px;
+    background: transparent;
+    border: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 34px;
+}
+
+.nav-currency-toggle .ctoggle.active {
+    background: var(--gold);
+    color: #fff;
+}
+
+/* ── DROPDOWN ── */
+.dropdown-toggle::after { border-top-color: #D4AF37; }
+.dropdown-toggle:hover::after { border-top-color: #FFD700; }
+
+.user-name-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold-dark);
+    margin-right: 12px;
+}
+
+.nav-profile-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* ── HEADER TITLE: no italic ── */
+.fullName-header {
+    font-style: normal !important;
+}
+
+.fullName-header em {
+    font-style: normal !important;
+    color: var(--gold);
+}
+
+/* ── SUMMARY CONTAINER: narrower than header ── */
+.summary-container {
+    max-width: 92%;
+    margin: 0 auto;
+}
+
+/* ── RATES STRIP ── */
+.rates-strip {
+    padding: 0 0 20px;
+}
+
+.rates-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+}
+
+/* Rate card price: fixed min dimensions so currency change doesn't resize */
+.rate-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    min-height: 40px;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-all;
+}
+
+.rate-unit {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 4px;
+    min-height: 18px;
+}
+
+/* ── FILTER SECTION ── */
+.filter-section {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 40px;
+}
+
+/* ── ASSET CARDS ── */
+.asset-item-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Green left border for profit */
+.asset-item-card.is-profit {
+    border-left: 4px solid var(--profit-green) !important;
+}
+
+/* Red left border for loss */
+.asset-item-card.is-loss {
+    border-left: 4px solid var(--loss-red) !important;
+}
+
+.asset-item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.asset-card-image-wrapper {
+    width: 100%;
+    height: 150px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    padding: 10px;
+}
+
+.asset-card-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.asset-card-body {
+    padding: 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Card content rows with better spacing */
+.asset-card-body .badge {
+    font-size: 0.75rem;
+}
+
+.asset-card-body h6 {
+    font-size: 0.92rem;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.asset-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.asset-card-meta span {
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+
+.asset-card-values {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+.asset-val-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.asset-val-row .label {
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+
+.asset-val-row .value {
+    font-weight: 700;
+    font-size: 0.92rem;
+}
+
+/* ── PROFIT INDICATOR BADGE ── */
+.profit-indicator {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+}
+
+.bg-profit { background: rgba(39, 174, 96, 0.15); color: var(--profit-green); }
+.bg-loss   { background: rgba(231, 76, 60, 0.15);  color: var(--loss-red); }
+
+/* ── FORM ── */
+.hidden-field { display: none; }
+.modal-content { border-radius: 20px; border: none; }
+.modal-header { border-bottom: 1px solid var(--border); padding: 25px; }
+.form-label { color: var(--ink); font-weight: 600; font-size: 0.9rem; }
+
+/* ── ASSET SUMMARY CARD ── */
+.asset-summary-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    text-align: center;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1200px) {
+    .rates-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-currency-toggle {
+        display: none;
+    }
+
+    .summary-container {
+        max-width: 100%;
+    }
+
+    .rates-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .rates-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

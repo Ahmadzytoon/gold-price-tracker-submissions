@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gold Prices – GoldVault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap"
+    rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+
+<body>
+  <div class="sparkle-layer" id="sparkleLayer"></div>
+  <div class="coin-burst" id="coinBurst"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <!-- LEFT -->
+    <div class="nav-left">
+      <div class="nav-brand">
+        <span class="nav-icon">⬡</span>
+        <span class="nav-title">GoldVault</span>
+      </div>
+    </div>
+
+    <!-- CENTER -->
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="../html/index.html">Home</a></li>
+        <li><a href="../html/prices.html" class="active">Gold Prices</a></li>
+        <li><a href="../html/myAssets.html" id="assetsBtn">My Assets</a></li>
+      </ul>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <div class="currency-toggle nav-currency">
+        <button class="toggle-btn active" id="btnUSD" onclick="setCurrency('USD')">USD</button>
+        <button class="toggle-btn" id="btnJOD" onclick="setCurrency('JOD')">JOD</button>
+      </div>
+
+      <!-- Logged-out buttons -->
+      <div class="nav-auth" id="navAuthButtons">
+        <button id="loginBtn" class="btn-ghost">Login</button>
+        <button id="registerBtn" class="btn-gold">Register</button>
+      </div>
+
+      <!-- Logged-in profile dropdown -->
+      <div class="nav-profile-dropdown" id="navProfileDropdown" style="display:none;">
+        <button class="profile-trigger" id="profileTrigger" type="button">
+          <span class="profile-name" id="navProfileName"></span>
+          <div class="profile-avatar">
+            <img id="navProfileImg" src="../assets/images/female.png" alt="Profile" />
+          </div>
+          <svg class="profile-caret" width="10" height="6" viewBox="0 0 10 6">
+            <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
+          </svg>
+        </button>
+        <div class="profile-dropdown-menu" id="profileDropdownMenu">
+          <button class="profile-menu-item" id="navMyProfileBtn" data-bs-toggle="modal" data-bs-target="#profileModal">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+            </svg>
+            My Profile
+          </button>
+          <div class="profile-menu-divider"></div>
+          <button class="profile-menu-item danger" id="navLogoutBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Sign Out
+          </button>
+        </div>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
+
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+      <a href="../html/index.html">Home</a>
+      <a href="../html/prices.html" class="active">Gold Prices</a>
+      <a href="../html/myAssets.html">My Assets</a>
+      <div class="mobile-menu-divider"></div>
+      <div style="display:flex;gap:8px;align-items:center;padding:8px 16px;">
+          <span style="font-size:0.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">Currency:</span>
+          <div class="currency-toggle" style="margin-left:auto;">
+              <button class="toggle-btn active" id="mobileBtnUSD" onclick="setCurrency('USD')">USD</button>
+              <button class="toggle-btn" id="mobileBtnJOD" onclick="setCurrency('JOD')">JOD</button>
+          </div>
+      </div>
+      <div class="mobile-menu-divider"></div>
+      <!-- Mobile auth: logged-out -->
+      <div id="mobileAuthButtons" style="display:flex;gap:10px;padding:10px 16px;">
+          <button class="btn-ghost" style="flex:1;" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+          <button class="btn-gold" style="flex:1;" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+      </div>
+      <!-- Mobile auth: logged-in -->
+      <div id="mobileProfileSection" style="display:none;padding:10px 16px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+              <img id="mobileProfileImg" src="../assets/images/female.png" alt="Profile"
+                  style="width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;">
+              <span id="mobileProfileName" style="font-weight:700;font-size:0.95rem;color:var(--charcoal);"></span>
+          </div>
+          <button class="profile-menu-item" style="width:100%;margin-bottom:6px;" data-bs-toggle="modal" data-bs-target="#profileModal">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              My Profile
+          </button>
+          <button class="profile-menu-item danger" id="mobileLogoutBtn" style="width:100%;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Sign Out
+          </button>
+      </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">🔴 Loading live prices...</span>
+    </div>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-content">
+        <p class="hero-eyebrow">Live Market Data</p>
+        <h1 class="page-title">Gold <em>Prices</em></h1>
+        <p class="page-sub">All prices calculated from live XAU ounce data</p>
+      </div>
+      <div class="live-price-card" id="livePriceCard">
+        <div class="live-badge">● LIVE</div>
+        <div class="page-ounce-price">
+          <span id="ozLabel">1 oz XAU =</span>
+          <strong id="priceUSD">—</strong>
+        </div>
+        <div class="page-time" id="pageTime"><span id="priceTime">Fetching...</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KARAT PRICES -->
+  <section class="prices-section">
+    <div class="prices-inner">
+
+
+      <!-- KARAT CAROUSEL -->
+      <div class="price-category">
+        <h2 class="cat-title">Gold by Karat <span class="cat-line"></span></h2>
+        <div class="karat-carousel-wrap" style="padding: 0 60px;">
+          <h3 class="table-title">Full Karat Reference — swipe or click arrows</h3>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#karatCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#karatCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          <div id="karatCarousel" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner" id="karatCarouselInner">
+              <!-- Slides injected by goldPrices.js via buildKaratCarousel() -->
+              <div class="carousel-item active">
+                <div class="karat-slide-card">
+                  <div>
+                    <div class="ks-karat" style="color:var(--muted);font-size:1.2rem;font-family:'DM Sans',sans-serif;font-weight:400;">Loading prices…</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Karat tab-style progress nav -->
+          <div class="karat-carousel-progress" id="karatCarouselProgress"></div>
+        </div>
+
+        <!-- Hidden tbody kept for goldPrices.js compatibility — not displayed -->
+        <table style="display:none"><tbody id="karatTableBody"></tbody></table>
+      </div>
+
+      <!-- COINS SECTION -->
+      <div class="price-category">
+        <h2 class="cat-title">Gold Coins <span class="cat-line"></span>
+
+        </h2>
+        <div class="coins-grid">
+
+          <div class="coin-detail-card">
+            <div class="coin-img-wrap">
+              <img src="../assets/coins/rashadi_coin.png" alt="Rashadi Lira" class="coin-detail-img" />
+              <div class="coin-glow"></div>
+            </div>
+            <div class="coin-info">
+              <h3 class="coin-name">Rashadi Lira</h3>
+              <p class="coin-desc">Ottoman-era gold coin, 7.216g of 21.6K gold. Widely traded in the Arab world.</p>
+              <div class="coin-specs">
+                <div class="spec-row"><span>Weight</span><strong>7.216 g</strong></div>
+                <div class="spec-row"><span>Purity</span><strong>21.6K (900‰)</strong></div>
+                <div class="spec-row"><span>Gold Content</span><strong>6.494 g</strong></div>
+              </div>
+              <div class="coin-price-display">
+                <span class="coin-price-label">Current Price</span>
+                <span class="coin-price-val" id="rashadiPrice">—</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="coin-detail-card">
+            <div class="coin-img-wrap">
+              <img src="../assets/coins/english_coin.png" alt="English Sovereign" class="coin-detail-img" />
+              <div class="coin-glow"></div>
+            </div>
+            <div class="coin-info">
+              <h3 class="coin-name">English Sovereign</h3>
+              <p class="coin-desc">British gold sovereign, 7.988g of 22K gold. A classic benchmark coin.</p>
+              <div class="coin-specs">
+                <div class="spec-row"><span>Weight</span><strong>7.988 g</strong></div>
+                <div class="spec-row"><span>Purity</span><strong>22K (916.7‰)</strong></div>
+                <div class="spec-row"><span>Gold Content</span><strong>7.322 g</strong></div>
+              </div>
+              <div class="coin-price-display">
+                <span class="coin-price-label">Current Price</span>
+                <span class="coin-price-val" id="englishPrice">—</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- GOLD BARS SECTION -->
+      <div class="price-category">
+        <h2 class="cat-title">Gold Bars <span class="cat-line"></span>
+
+        </h2>
+        <div class="bars-section">
+          <div class="bar-visual">
+            <img src="../assets/bars/gold-bar.jpg" alt="Gold Bar" class="bar-big-img" />
+            <div class="bar-shimmer"></div>
+          </div>
+          <div class="bars-table-wrap">
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>Bar Size</th>
+                  <th>Weight</th>
+                  <th>Price (24K)</th>
+                </tr>
+              </thead>
+              <tbody id="barTableBody">
+                <tr>
+                  <td colspan="3" class="loading-row">Loading prices...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CALCULATOR -->
+      <div class="price-category">
+        <h2 class="cat-title">Gold Calculator <span class="cat-line"></span></h2>
+        <div class="calculator-card">
+          <div class="calc-row">
+            <div class="calc-group">
+              <label>Weight (grams)</label>
+              <input type="number" id="calcWeight" class="calc-input" placeholder="e.g. 10" oninput="calculate()" />
+            </div>
+            <div class="calc-group">
+              <label>Karat</label>
+              <select id="calcKarat" class="calc-input" onchange="calculate()">
+                <option value="24">24K</option>
+                <option value="21" selected>21K</option>
+                <option value="18">18K</option>
+                <option value="14">14K</option>
+              </select>
+            </div>
+          </div>
+          <div class="calc-result" id="calcResult">
+            Enter weight and karat to calculate value
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 GoldVault · Prices update every 60 seconds from live XAU data</p>
+  </footer>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="d-flex justify-content-end p-2">
+          <button type="button" class="btn-close xBtn"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="text-center">
+            <h1 class="h2">Sign in</h1>
+            <p class="text-muted">Sign in below to access your account</p>
+          </div>
+          <form class="mt-4" id="loginForm">
+            <div class="mb-2">
+              <label class="form-label text-muted mb-1">Email Address</label>
+              <input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="Enter your email">
+              <span class="error-span" id="error-loginEmail"></span>
+            </div>
+            <div class="mb-4">
+              <label class="form-label text-muted mb-1">Password</label>
+              <input type="password" class="form-control" id="loginPassword" name="loginPassword"
+                placeholder="Enter your password">
+              <span class="error-span" id="error-loginPassword"></span>
+            </div>
+            <div class="d-grid mb-4">
+              <button type="submit" class="btn-custom">Sign in</button>
+            </div>
+            <hr>
+            <p class="text-center text-muted mt-3">
+              Don't have an account yet?
+              <button id="redirectToSignUp" type="button" class="link-btn">Sign up</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div class="modal fade" id="registerModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="d-flex justify-content-end p-2">
+          <button type="button" class="btn-close xBtn"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="text-center">
+            <h1 class="h2">Sign up</h1>
+            <p class="text-muted">Create an account to get started</p>
+          </div>
+          <form class="mt-4" id="registerForm">
+            <div class="mb-3">
+              <label class="form-label text-muted mb-1">First Name</label>
+              <input type="text" class="form-control" id="fName" name="fName" placeholder="Enter your first name">
+              <span class="error-span" id="error-fName"></span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-muted mb-1">Last Name</label>
+              <input type="text" class="form-control" id="lName" name="lName" placeholder="Enter your last name">
+              <span class="error-span" id="error-lName"></span>
+            </div>
+            <div class="mb-1">
+              <label class="form-label text-muted mb-1">Email Address</label>
+              <input type="text" class="form-control" id="registerEmail" name="email"
+                placeholder="Enter your email address">
+              <span class="hint-span" id="error-registerEmail"></span>
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control" id="confirmEmail" name="confirmEmail" placeholder="Confirm Email">
+              <span class="error-span" id="error-confirmEmail"></span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label text-muted mb-1">Gender</label>
+              <select id="gender" name="gender" class="form-select">
+                <option value="" disabled selected hidden>Select Gender</option>
+                <option value="m">Male</option>
+                <option value="f">Female</option>
+              </select>
+              <span class="error-span" id="error-gender"></span>
+            </div>
+            <div class="mb-1">
+              <label class="form-label text-muted mb-1">Password</label>
+              <input type="password" class="form-control" id="registerPassword" name="password"
+                placeholder="Enter your password">
+              <span class="hint-span" id="error-registerPassword"></span>
+            </div>
+            <div class="mb-4">
+              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                placeholder="Confirm Password">
+              <span class="error-span" id="error-confirmPassword"></span>
+            </div>
+            <div class="d-grid mb-4">
+              <button type="submit" class="btn-custom">Sign up</button>
+            </div>
+            <hr>
+            <p class="text-center text-muted mt-3">
+              Already have an account?
+              <button id="redirectToSignIn" type="button" class="link-btn">Sign in</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg border-0"
+        style="border-radius:20px; overflow:hidden; background: var(--cream);">
+        <div
+          style="background: linear-gradient(135deg, #1C1A14 0%, #3d2e00 70%, #7a5a10 100%); padding: 28px 28px 0; text-align:center;">
+          <p
+            style="font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(245,217,138,0.65); margin-bottom:16px;">
+            My Profile</p>
+          <div
+            style="width:84px; height:84px; border-radius:50%; border:3px solid var(--gold-pale); margin:0 auto; overflow:hidden; position:relative; bottom:-18px; background:rgba(201,149,42,0.15);">
+            <img id="profileModalPic" src="../assets/images/female.png" alt="Profile"
+              style="width:100%; height:100%; object-fit:cover;">
+          </div>
+        </div>
+        <div style="padding: 32px 28px 24px;">
+          <h5 class="serif fw-bold text-center mb-1" id="profileModalName">—</h5>
+          <p class="text-center text-muted small mb-4" id="profileModalEmail">—</p>
+          <hr style="border-color: var(--border);">
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <div style="background:#fff; border:1px solid var(--border); border-radius:10px; padding:12px 14px;">
+                <div
+                  style="font-size:0.7rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">
+                  First Name</div>
+                <div class="fw-semibold" id="profileModalFirst">—</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div style="background:#fff; border:1px solid var(--border); border-radius:10px; padding:12px 14px;">
+                <div
+                  style="font-size:0.7rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">
+                  Last Name</div>
+                <div class="fw-semibold" id="profileModalLast">—</div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div style="background:#fff; border:1px solid var(--border); border-radius:10px; padding:12px 14px;">
+                <div
+                  style="font-size:0.7rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">
+                  Email Address</div>
+                <div class="fw-semibold" id="profileModalEmail2">—</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div style="background:#fff; border:1px solid var(--border); border-radius:10px; padding:12px 14px;">
+                <div
+                  style="font-size:0.7rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">
+                  Gender</div>
+                <div><span class="badge rounded-pill"
+                    style="background:rgba(201,149,42,0.12); color:var(--gold-dark); border:1px solid var(--border); font-size:0.8rem;"
+                    id="profileModalGender">—</span></div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div style="background:#fff; border:1px solid var(--border); border-radius:10px; padding:12px 14px;">
+                <div
+                  style="font-size:0.7rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">
+                  Member Since</div>
+                <div class="fw-semibold" id="profileModalJoined">—</div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex gap-2 mb-4">
+            <div
+              style="flex:1; background:rgba(201,149,42,0.08); border:1px solid var(--border); border-radius:10px; padding:10px 8px; text-align:center;">
+              <div class="serif" style="font-size:1.4rem; font-weight:700; color:var(--gold-dark);"
+                id="profileModalCount">0</div>
+              <div style="font-size:0.72rem; color:var(--muted);">Assets</div>
+            </div>
+            <div
+              style="flex:1; background:rgba(201,149,42,0.08); border:1px solid var(--border); border-radius:10px; padding:10px 8px; text-align:center;">
+              <div class="serif" style="font-size:1.4rem; font-weight:700; color:var(--gold-dark);"
+                id="profileModalValue">0</div>
+              <div style="font-size:0.72rem; color:var(--muted);">Portfolio (JOD)</div>
+            </div>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-light flex-fill" data-bs-dismiss="modal">Close</button>
+            <button class="btn flex-fill text-white sign-out-link" id="profileModalSignOut"
+              style="background:var(--gold); border:none;">Sign Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts in order -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.9.0/src/sha256.min.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="../js/goldPrices.js"></script>
+  <script src="../js/news.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+
+</html>
