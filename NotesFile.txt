@@ -1,0 +1,367 @@
+gold = #C9952A
+
+====================== currency-toggle ======================
+<div class="currency-toggle">
+    <button class="toggle-btn active" id="btnUSD" onclick="setCurrency('USD')">USD</button>
+    <button class="toggle-btn" id="btnJOD" onclick="setCurrency('JOD')">JOD</button>
+</div>
+
+====================== the gold api ======================
+
+====[1. Basic Fetch API pattern]====
+
+The general idea of fetch() is:
+
+    1. Call fetch('URL') → returns a Promise for an HTTP response.
+    2. Call .json() (or .text(), etc.) on that response to read the body.
+    3. Use .then(...) for success, .catch(...) for network errors.
+
+In the code, that pattern is:
+
+{js file}
+function fetchLiveGoldPrice() {
+  fetch(goldApiUrl)
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      // use data
+    })
+    .catch(function(err) {
+      // handle errors
+    });
+}
+
+====[2. Applying it to gold prices]====
+
+Inside the second .then, it handle the JSON from the gold API:
+
+{js file}
+.then(function(data) {
+  if (data && data.price) {
+    var previousPrice  = liveOzPriceUSD;
+    liveOzPriceUSD     = parseFloat(data.price);
+
+    updateAllPricesOnPage(previousPrice);
+    saveChartDataPoint(liveOzPriceUSD);
+    checkPriceAlert(liveOzPriceUSD);
+  }
+})
+
+data.price is assumed to be the latest gold price in USD per troy ounce.
+    1. Remember the old price (previousPrice) so I can detect up/down moves.
+    2. Update liveOzPriceUSD, the central state used everywhere else.
+
+Call:
+    1. updateAllPricesOnPage(...) to recalculate and update the UI.
+    2. saveChartDataPoint(...) to add this price to chart history.
+    3. checkPriceAlert(...) to possibly trigger a notification.
+
+This is how the live price is distributed across your app after each fetch.
+
+====[3. Handling errors and fallback]====
+
+The .catch handles network/API failures:
+
+{js file}
+.catch(function(err) {
+  console.warn('Gold API error, using demo fallback price:', err);
+  var previousPrice  = liveOzPriceUSD;
+  liveOzPriceUSD     = 3020 + (Math.random() * 20 - 10);
+  updateAllPricesOnPage(previousPrice);
+});
+
+If the request fails or JSON parsing throws, execution jumps here.
+
+Instead of leaving the UI blank, I can:
+    1. Log the error.
+    2. Set a “demo” price around 3020 with a bit of randomness.
+    3. Reuse updateAllPricesOnPage so the UI still shows something believable.
+
+So you always end up with some price to show, even without the real API.
+
+====[4. Wiring fetch into the app lifecycle]====
+
+we call fetchLiveGoldPrice() in two places:
+
+    1. Once on page load (inside DOMContentLoaded) to show an initial price.
+    2. Repeatedly with setInterval(fetchLiveGoldPrice, 60000); to auto-refresh every 60 seconds.
+
+That combination gives you live updating prices without the user needing to refresh manually.
+
+====================== price calculations ======================
+***
+
+## [1. From ounce price → 24K price per gram] ##
+
+The API gives you **XAU price per troy ounce in USD** 
+(for example, 3000 USD/oz). [goldprice](https://goldprice.org/gold-price.html)
+
+In code: 
+
+{js file}
+```
+function getPricePerGram24K(ozPriceUSD) {
+  return ozPriceUSD / gramsPerTroyOz;
+}
+```
+
+- `gramsPerTroyOz = 31.1035;` (fixed conversion). [metric-calculator](https://metric-calculator.com/convert-troy-ounce-to-gram.htm)
+- So if gold is 3000 USD/oz then:
+    24K price per gram = 3000/31.1035 ≈ approx 96.4 USD/g
+That is the **pure gold price** (24K) per gram.
+
+***
+
+## [2. From 24K to any karat (21K, 18K, etc.)] ##
+
+You use the karat **purity ratio**: karat / 24. [omnicalculator](https://www.omnicalculator.com/finance/gold-melt)
+
+{js file}
+```
+function getPricePerGramByKarat(ozPriceUSD, karat) {
+  var purityRatio = karat / 24;
+  return getPricePerGram24K(ozPriceUSD) * purityRatio;
+}
+```
+
+Examples (assuming 96.4 USD/g for 24K):
+
+- 21K: purity = 21/24 = 0.875 → (96.4 × 0.875 ≈ 84.4) USD/g
+- 18K: purity = 18/24 = 0.75 → (96.4 × 0.75 ≈ 72.3) USD/g
+
+So formula is:
+
+    price per gram (karat K) = price per gram (24K) × (K/24)
+    
+        ex: If the price of 24K gold is ($100) per gram and you want to know the price of (18K) gold:
+        1. Formula: 100 * (18/24)
+        2. Ratio: 18 / 24 = 0.75  (18K gold is 75% pure)
+        3. Calculation: 100 * 0.75 = 75 USD/g
+
+***
+
+## [3. From USD → JOD] ##
+
+we store:
+
+{js file}
+```
+var usdToJod = 0.709;
+```
+
+Then:
+
+{js file}
+```
+function convertToSelectedCurrency(priceUSD) {
+  if (selectedCurrency === 'JOD') return priceUSD * usdToJod;
+  return priceUSD;
+}
+```
+
+So if a value is 100 USD and the user is on JOD:
+    100 × 0.709 = 70.9 JOD
+
+
+`formatPrice` then adds the symbol (`$` or `JD`) and rounds.
+
+***
+
+## [4. Total value for weight (calculator)] ##
+
+The calculator combines the above:
+
+{js file}
+```
+var pricePerGram = getPricePerGramByKarat(liveOzPriceUSD, karat);
+var totalUSD     = pricePerGram * weightGrams;
+var totalDisplay = convertToSelectedCurrency(totalUSD);
+```
+
+- Step 1: get price per gram for that karat.
+- Step 2: multiply by grams to get total USD.
+- Step 3: convert to JOD if needed.
+- Step 4: display total and per-gram both in the selected currency.
+
+So mathematically:
+    value = (ozPriceUSD/31.1035 × K/24) × weightGrams
+
+
+====================== The chart ======================  
+
+The chart shows **gold price history** (XAU per ounce) over time. 
+It’s a **Chart.js line chart** that auto-populates with real prices you fetch and stores data in
+`localStorage` to persist across sessions. [github](https://github.com/chartjs/Chart.js/discussions/9993)
+
+---
+## 1. Data storage ##
+
+The chart data lives in `chartPriceData`:
+
+{js file}
+```
+var chartPriceData = { labels: [], usd: [], jod: [] };
+```
+
+- `labels`: date strings like `["4/2", "4/3", ...]` (month/day).
+- `usd`: array of USD prices matching each label.
+- `jod`: same prices converted to JOD (using your `usdToJod` rate).
+
+**How it grows**: 
+every time you fetch a new price, `saveChartDataPoint(liveOzPriceUSD)`:
+    - Adds today’s `M/D` label.
+    - Adds `liveOzPriceUSD` to `usd[]`.
+    - Adds `liveOzPriceUSD * usdToJod` to `jod[]`.
+    - Keeps only the **last 60 points** (slices old data).
+    - Saves as JSON to `localStorage.goldChartData` so it survives page reloads.
+
+**On first load**: `loadChartData()` loads from storage or generates fake 30-day data so the chart isn’t empty.
+
+***
+## 2. Rendering the chart ##
+`renderPriceChart()` creates/updates the chart on `canvas id="priceChart">`:
+    - Chooses dataset: `usd[]` or `jod[]` based on `selectedCurrency`.
+    - **If chart exists** (`priceChartInstance`): just update `data.labels`, `data.datasets[0].data`, label, then `chartInstance.update()`.
+    - **If new**: create `new Chart(ctx, { type: 'line', data: {...}, options: {...} })` and store in `priceChartInstance`.
+
+Key Chart.js parts:
+- **data**: `{ labels: [...], datasets: [{ label: 'XAU ($)', data: [3000, 3020, ...], ... }] }`
+- **options**:
+  - `responsive: true`: resizes with the container. [chartjs](https://www.chartjs.org/docs/latest/configuration/responsive.html)
+  - Gold gradient fill under the line.
+  - Custom tooltip with gold theme and currency symbol.
+  - Light grid/ticks in gold theme.
+  - `interaction: { mode: 'index' }`: tooltip shows the value at that x-position.
+---
+
+## 3. Updating the chart ##
+- **Currency toggle** (`setCurrency` or `refreshChartCurrency`): swaps the dataset array (`usd` ↔ `jod`), 
+    updates label (`XAU ($)` ↔ `XAU (JD)`), and calls `chartInstance.update()`.
+- **Date filter** (`filterChartByDate`):
+  - Reads `chartDateFrom`/`chartDateTo` inputs.
+  - Loops through labels, converts `M/D` → `YYYY-MM-DD` (assumes current year).
+  - Keeps only points in range.
+  - Updates chart data and calls `update()`.
+- **New price**: `saveChartDataPoint` → `renderPriceChart` → `update()`.
+
+***
+## 4. Visual style
+- **Line**: gold color (`#C9952A`), smooth curve (`tension: 0.4`), no points (except on hover).
+- **Fill**: gradient from gold (opaque) to transparent.
+- **Axes**: light gold grid, muted tick labels, y-axis shows currency symbol.
+- **Tooltip**: dark gold theme, shows `JD 2150.32` or `$ 3020.45`.
+
+The chart **auto-refreshes** whenever you get a new price, switch currency, or filter dates.
+
+***
+
+**Quick test**: if you have 3 data points:
+- labels: `["4/1", "4/2", "4/3"]`
+- usd: `[3000, 3020, 2990]`
+- selectedCurrency = 'JOD'
+
+
+====================== The hart Code ======================  
+It uses **localStorage** to persist data, **Chart.js** for the line chart, and handles currency switching + date filtering.
+
+***
+
+## 1. `saveChartPoint(priceUSD)` — Add new price
+
+**What it does**: Called every time you fetch a live price. Adds one data point to the chart history.
+
+- Loads `chartData` from `localStorage` (if exists).
+- Creates label: `now.getMonth() + 1 + '/' + now.getDate()` (e.g. `"4/3"`).
+- Pushes to arrays:
+  - `chartData.labels.push(label)`
+  - `chartData.usd.push(priceUSD.toFixed(2))`
+  - `chartData.jod.push((priceUSD * USD_TO_JOD).toFixed(2))`
+- **Limits to 60 points**: `slice(-60)` keeps only the newest 60 (drops oldest).
+- Saves back to `localStorage` as JSON string.
+- Calls `renderChart()` to update the visual.
+
+**Key**: Data is stored as `{ labels: [...], usd: [...], jod: [...] }` — three parallel arrays.
+
+***
+
+## 2. `loadChartData()` — First load
+
+**What it does**: Runs on page load to populate the chart.
+
+- Loads from `localStorage`.
+- **If exists**: parse JSON → `renderChart()`.
+- **If empty**: generate fake 30-day history:
+  - Loop backward 30 days: `d.setDate(d.getDate() - i)`.
+  - Label: `M/D`.
+  - Price: start at 2950, add random `-20 to +80` each day (simulates realistic movement).
+  - Add to both `usd` and `jod` arrays.
+  - Call `renderChart()`.
+
+**Result**: Chart is never empty, even first visit.
+
+***
+
+## 3. `renderChart()` — Create or update Chart.js
+
+**What it does**: Draws the line chart on `<canvas id="priceChart">`.
+
+- Gets canvas context: `canvas.getContext('2d')`.
+- Picks data based on `currentCurrency`: `usd[]` or `jod[]`, sets symbol (`$`/ `JD`).
+- **Gold gradient** under the line: fades from gold (top) to transparent (bottom).
+
+**If chart exists** (`priceChart`):
+- Update `data.labels`, `datasets[0].data`, label.
+- `priceChart.update()` (fast refresh).
+
+**If new**:
+- `new Chart(ctx, { type: 'line', data: {...}, options: {...} })`.
+- **data**: labels + one dataset (line with gold styling, `tension: 0.4` for smooth curve).
+- **options**:
+  - `responsive: true`: resizes automatically.
+  - No legend, custom gold/dark tooltip.
+  - Gold grid/ticks, y-axis shows currency.
+  - `mode: 'index'`: hover shows nearest point.
+
+***
+
+## 4. `toggleChart(cur, btn)` + `updateChartCurrency()` — Currency switch
+
+**What it does**: USD ↔ JOD toggle.
+
+- `toggleChart`: updates button active state, sets `currentCurrency`, calls `updateChartCurrency()`.
+- `updateChartCurrency`:
+  - Picks `prices` array (`usd` or `jod`).
+  - Updates dataset data, label, **y-axis tick callback** (adds `$` or `JD` to numbers).
+  - `priceChart.update()` (instant switch, no re-render).
+
+**Smooth**: Chart data never changes — just swaps arrays.
+
+***
+
+## 5. `filterChartByDate()` — Date range filter
+
+**What it does**: Shows only data between `chartDateFrom`/`chartDateTo` (YYYY-MM-DD format).
+
+- Loads full data from storage.
+- **If no dates**: show all → `update()`.
+- **Else**: loop through each label:
+  - Parse `"4/3"` → `parts = ['4', '3']`.
+  - Make `pointDate = '2026-04-03'` (current year).
+  - Keep if `fromVal <= pointDate <= toVal`.
+  - Build `filtered = { labels: [...], usd: [...], jod: [...] }`.
+- Update chart with filtered data + currency → `update()`.
+
+**Smart**: assumes labels are recent (current year), filters without changing stored data.
+
+***
+
+## 6. `resetChartFilter()` — Clear dates
+
+Clears input fields → calls `filterChartByDate()` → shows all data.
+
+***
+
+**Big picture flow**:
+1. Page load → `loadChartData()` → fake/real data → `renderChart()`.
+2. New price → `saveChartPoint()` → add point → save → `renderChart()` → `update()`.
+3. User toggles currency → swap arrays → `update()`.
+4. User sets dates → filter → `update()`.
