@@ -1,0 +1,173 @@
+/* 1. Global Variables (Your Color Palette) */
+:root {
+  --gold: #B07D1A;
+  --gold-dark: #7A5A0A;
+  --bg-page: #F9F6EE;
+  --bg-white: #FFFFFF;
+  --warm-grey: #EDE8D8;
+  --text-primary: #1A1107;
+  --text-muted: #7A6B3A;
+  --profit-bg: #E8F5E9;
+  --profit-text: #2E7D32;
+  --loss-bg: #FEECEB;
+  --loss-text: #C62828;
+}
+
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.top-section h2 {
+  margin: 0 0 5px 0;
+  color: var(--text-primary);
+  font-size: 1.8rem;
+}
+
+.top-section p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.search-filter {
+  display: flex;
+  gap: 10px;
+}
+
+
+.layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+
+.form-box {
+  background-color: var(--bg-white);
+  border: 1px solid var(--warm-grey);
+  border-radius: 12px;
+  padding: 25px;
+  width: 100%;
+  max-width: 380px; /* Keeps the form from getting too wide */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.form-box h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+/* 6. Form Inputs Styling */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid var(--warm-grey);
+  border-radius: 6px;
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--bg-white);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+
+.row {
+  display: flex;
+  gap: 15px;
+}
+
+.row > div {
+  flex: 1; 
+}
+
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--gold);
+  color: var(--bg-white);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: var(--gold-dark);
+}
+
+.assets-box {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+.empty-state {
+  border: 2px dashed var(--warm-grey);
+  border-radius: 12px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-state h4 {
+  margin: 0 0 10px 0;
+  color: var(--text-primary);
+}
+
+.empty-state p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column; 
+  }
+  
+  .form-box {
+    max-width: 100%; 
+  }
+}

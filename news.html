@@ -1,0 +1,69 @@
+<style>
+  .ticker-container {
+    position: relative;
+    background: #fff;
+  }
+
+  .ticker-label {
+    background-color: #b07d1a;
+    color: white;
+    height: 100%;
+    white-space: nowrap;
+    z-index: 10;
+    font-size: 0.85rem;
+  }
+
+  .ticker-wrapper {
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+  }
+
+  .ticker-content {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-scroll 200s linear infinite;
+    padding-left: 20px;
+  }
+
+  @keyframes ticker-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.33%);
+    }
+  }
+  .ticker-content:hover {
+    animation-play-state: paused;
+    cursor: pointer;
+  }
+</style>
+
+<div
+  class="ticker-container d-flex align-items-center bg-white border-bottom"
+  style="height: 45px; overflow: hidden"
+>
+  <div class="ticker-label fw-bold px-3 d-flex align-items-center shadow-sm">
+    <span class="pulse-dot me-2"></span> LIVE NEWS
+  </div>
+
+  <div class="ticker-wrapper flex-grow-1 h-100 d-flex align-items-center">
+    <div id="news-ticker" class="ticker-content">
+      Fetching latest market updates...
+    </div>
+  </div>
+</div>
