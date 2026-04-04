@@ -1,0 +1,158 @@
+body {
+  background: radial-gradient(
+    circle at center,
+    #a44a0a 0%,
+    #5a1f07 50%,
+    #2b0f05 100%
+  );
+  color: rgb(238, 210, 154) !important;
+  font-family: initial !important;
+  font-weight: bold !important;
+}
+
+header nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #ddd;
+}
+
+.logo {
+  color: #f5b75a;
+}
+.navbar {
+  background: transparent;
+}
+
+.nav-link {
+  color: #ddd !important;
+}
+
+.nav-link:hover {
+  color: #f5b75a !important;
+}
+
+.card-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  height: 100%;
+}
+
+.btn-gold {
+  background: linear-gradient(to right, #f5b75a, #d9921e);
+  border: none;
+  color: black;
+  font-weight: bold;
+}
+
+.btn-gold:hover {
+  opacity: 0.9;
+}
+
+/* ===== RATES ===== */
+.rate-card {
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.rate-card.gold {
+  background: linear-gradient(135deg, #f5b75a, #d9921e);
+  color: black;
+}
+
+.rate-card.silver {
+  background: #cfd3d6;
+  color: black;
+}
+
+.chart-placeholder {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  background: linear-gradient(to top, rgba(245, 183, 90, 0.2), transparent);
+}
+.USDJOR-btn {
+  margin-top: 65px;
+}
+
+.coin {
+  font-size: 30px;
+}
+.coinsImage {
+  background: none;
+  width: 70px;
+  height: 60px;
+  border-radius: 50%;
+}
+#rashidiC {
+  height: 60px;
+  width: 100px;
+}
+.gold-bar {
+  font-size: 30px;
+}
+
+.card-box:hover {
+  transform: translateY(-5px);
+  transition: 0.3s;
+}
+#goldChart {
+  width: 75% !important;
+}
+
+.big-price {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.small-price {
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+#goldBar {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#goldBar:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+.gold-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex; /* THIS is important */
+  justify-content: center; /* horizontal center */
+  align-items: center; /* vertical center */
+
+  z-index: 999;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.gold-model-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  /* height: 100%; */
+}
+
+.gold-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
