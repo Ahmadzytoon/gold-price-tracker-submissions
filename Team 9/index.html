@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gold Price Tracker - Live Gold Rates & 24K Gold Prices</title>
+
+    <meta
+      name="description"
+      content="Track live gold prices, 24K, 21K, and 18K gold rates per gram. Get real-time updates on Rashadi coins, English coins, and gold bars with 30-day price charts."
+    />
+    <meta
+      name="keywords"
+      content="gold price, live gold rates, 24K gold, 21K gold, 18K gold, gold tracker, Rashadi coin, gold price chart, gold news"
+    />
+    <meta name="author" content="Gold Tracker" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Gold Price Tracker - Live Gold Rates & Prices"
+    />
+    <meta
+      property="og:description"
+      content="Track live gold prices and rates for 24K, 21K, 18K gold. Real-time updates with price charts and latest gold news."
+    />
+    <meta property="og:image" content="./assets/gold.png" />
+    <meta property="og:url" content="http://127.0.0.1:5503/index.html" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gold Price Tracker - Live Gold Rates" />
+    <meta
+      name="twitter:description"
+      content="Track live gold prices and rates for 24K, 21K, 18K gold with real-time updates and charts."
+    />
+    <meta name="twitter:image" content="./assets/gold.png" />
+
+    <meta name="theme-color" content="#ffc107" />
+    <meta name="robots" content="index, follow" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪙</text></svg>"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/home.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <span class="logo-icon"
+            ><img src="./assets/rashadi.png" style="width: 30px"
+          /></span>
+          Gold Tracker
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="prices.html"> Gold Prices</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="assets.html">My Assets</a>
+            </li>
+            <li class="nav-item ms-lg-3" id="nav-login">
+              <a
+                class="btn btn-warning btn-sm px-4 rounded-pill shadow-sm"
+                href="login.html"
+                style="
+                  letter-spacing: 0.5px;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 6px;
+                "
+              >
+                Login
+                <span aria-hidden="true" style="font-size: 14px; line-height: 1"
+                  >&rarr;</span
+                >
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="profile.html"
+                class="nav-link text-warning"
+                id="nav-username"
+                style="display: none"
+              ></a>
+            </li>
+            <li class="nav-item">
+              <button
+                class="btn btn-sm btn-outline-warning ms-2"
+                id="nav-logout"
+                style="display: none"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      <div class="row g-4">
+        <div class="col-lg-4" style="text-align: center">
+          <div class="price-card">
+            <h6 class="">Live Gold Price</h6>
+            <h2 id="ounce-price">Loading...</h2>
+            <p id="ounce-price-sub" class=""></p>
+            <small id="last-updated" class=""></small>
+            <div class="mt-3">
+              <button
+                class="btn btn-sm btn-outline-warning"
+                id="currency-toggle"
+              >
+                USD
+              </button>
+            </div>
+            <br />
+            <img src="./assets/gold.png" style="width: 240px" />
+          </div>
+        </div>
+
+        <div class="col-lg-8">
+          <div class="chart-card">
+            <h6>Gold Price Chart (Last 30 Days)</h6>
+            <canvas id="priceChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mt-2">
+        <h5 class="mb-0">Gold Rates</h5>
+
+        <div class="col-md-4">
+          <div class="rate-card">
+            <div class="rate-label">
+              <img src="./assets/gold.png" style="width: 20px" /> 24K Gold
+            </div>
+            <div class="rate-value" id="price-24k">-</div>
+            <small>per gram</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="rate-card">
+            <div class="rate-label">
+              <img src="./assets/gold.png" style="width: 20px" /> 21K Gold
+            </div>
+            <div class="rate-value" id="price-21k">-</div>
+            <small>per gram</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="rate-card featured">
+            <div class="rate-label">
+              <img src="./assets/gold.png" style="width: 20px" /> 18K Gold
+            </div>
+            <div class="rate-value" id="price-18k">-</div>
+            <small>per gram</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="rate-card">
+            <div class="rate-label">
+              <img src="./assets/rashadi.png" style="width: 20px" /> Rashadi
+              Coin
+            </div>
+            <div class="rate-value" id="price-rashadi">-</div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="rate-card">
+            <div class="rate-label">
+              <img src="./assets/rashadi.png" style="width: 20px" /> English
+              Coin
+            </div>
+            <div class="rate-value" id="price-english">-</div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="rate-card">
+            <div class="rate-label">
+              <img src="./assets/gold.png" style="width: 20px" /> Gold Bar
+            </div>
+            <div class="rate-value" id="price-bar">-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5 mb-5">
+      <div class="d-flex align-items-center gap-3 mb-4">
+        <h5 class="news-section-title mb-0">Latest Gold News</h5>
+        <div class="news-title-line"></div>
+      </div>
+
+      <div class="swiper news-swiper">
+        <div class="swiper-wrapper" id="news-cards-container">
+          <div class="swiper-slide"><div class="news-card-skeleton"></div></div>
+          <div class="swiper-slide"><div class="news-card-skeleton"></div></div>
+          <div class="swiper-slide"><div class="news-card-skeleton"></div></div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/gold.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/home.js"></script>
+  </body>
+</html>

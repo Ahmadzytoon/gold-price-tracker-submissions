@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Assets - Gold Tracker</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪙</text></svg>"
+    />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/assets.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <span class="logo-icon"
+            ><img src="./assets/rashadi.png" style="width: 30px"
+          /></span>
+          Gold Tracker
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="prices.html">Gold Prices</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="assets.html">My Assets</a>
+            </li>
+            <li class="nav-item ms-lg-3" id="nav-login">
+              <a
+                class="btn btn-warning btn-sm px-4 rounded-pill shadow-sm"
+                href="login.html"
+                style="
+                  letter-spacing: 0.5px;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 6px;
+                "
+              >
+                Login
+                <span aria-hidden="true" style="font-size: 14px; line-height: 1"
+                  >&rarr;</span
+                >
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="profile.html"
+                class="nav-link text-warning"
+                id="nav-username"
+                style="display: none"
+              ></a>
+            </li>
+            <li class="nav-item">
+              <button
+                class="btn btn-sm btn-outline-warning ms-2"
+                id="nav-logout"
+                style="display: none"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      <div
+        class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2"
+      >
+        <h4 class="mb-0">My Gold Assets</h4>
+        <button
+          class="btn btn-warning"
+          data-bs-toggle="modal"
+          data-bs-target="#addAssetModal"
+        >
+          + Add Asset
+        </button>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-md-5">
+          <input
+            type="text"
+            id="search-input"
+            class="field"
+            placeholder="Search by category..."
+          />
+        </div>
+        <div class="col-md-3">
+          <select id="filter-type" class="field">
+            <option value="">All Types</option>
+            <option value="Jewelry">Jewelry</option>
+            <option value="Bars">Bars</option>
+            <option value="Coins">Coins</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select id="filter-karat" class="field">
+            <option value="">All Karats</option>
+            <option value="24">24K</option>
+            <option value="21">21K</option>
+            <option value="18">18K</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" id="assets-container">
+        <p class="text-center mt-4">Loading assets...</p>
+      </div>
+    </div>
+
+    <div class="modal fade" id="addAssetModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content modal-dark">
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Asset</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="add-asset-form">
+              <div class="mb-3">
+                <label class="form-label">Type</label>
+                <select id="asset-type" class="field">
+                  <option value="">Select type</option>
+                  <option value="Jewelry">Jewelry</option>
+                  <option value="Bars">Bars</option>
+                  <option value="Coins">Coins</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Karat</label>
+                <select id="asset-karat" class="field">
+                  <option value="">Select karat</option>
+                  <option value="24">24K</option>
+                  <option value="21">21K</option>
+                  <option value="18">18K</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Category (e.g. Ring, Necklace)</label>
+                <input
+                  type="text"
+                  id="asset-category"
+                  class="field"
+                  placeholder="e.g. Gold Ring"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Weight (grams)</label>
+                <input
+                  type="number"
+                  id="asset-weight"
+                  class="field"
+                  placeholder="e.g. 5.5"
+                  step="0.01"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Purchase Price (USD)</label>
+                <input
+                  type="number"
+                  id="asset-purchase-price"
+                  class="field"
+                  placeholder="e.g. 320"
+                  step="0.01"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Purchase Date</label>
+                <input type="date" id="asset-purchase-date" class="field" />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Image (optional)</label>
+                <input
+                  type="file"
+                  id="asset-image"
+                  class="field"
+                  accept="image/*"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-warning" id="save-asset-btn">
+              Save Asset
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/gold.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/assets.js"></script>
+  </body>
+</html>
