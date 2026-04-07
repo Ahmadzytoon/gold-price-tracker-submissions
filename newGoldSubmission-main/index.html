@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AURUM</title>
+    <link rel="icon" type="image/png" href="media/icons/icon.png" />
+    <link rel="stylesheet" href="css/home.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <h2 class="title">Aurum</h2>
+    </div>
+
+    <header>
+      <!-- title with menu -->
+      <h2 class="hidden-title">Aurum</h2>
+      <div class="nav-bar">
+        <a name="home" value="home" href="#" class="active">Home</a>
+        <p>|</p>
+        <a name="myAssets" value="myAssets" href="assets.html">My Assets</a>
+        <p>|</p>
+        <a id="authLink" href=""></a>
+      </div>
+    </header>
+
+    <!-- news slider -->
+    <div class="news-strip">
+      <div class="news-strip__label">
+        <span class="news-strip__dot"></span>
+        <h5>LIVE NEWS </h5> 
+      </div>
+      <div class="swiper news-swiper">
+        <div class="swiper-wrapper" id="news"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+
+
+    <!-- our prices content -->
+    <main>
+      <!-- live price display -->
+      <section class="prices">
+        <div class="price-card-main animation" id="pricecardmain">
+          <h6>
+            <span style="color: #4ade80" class="dot-glow"
+              ><i class="fa-solid fa-circle"></i
+            ></span>
+            LIVE GOLD SPOT PRICE
+          </h6>
+          <h4 id="currentPriceCard"></h4>
+          <p id="changeOfPrice" class="changeOfPrice">+0.00%</p>
+          <div>
+            <button
+              name="usCurrency"
+              value="USD"
+              class="clicked"
+              id="usCurrency"
+            >
+              USD
+            </button>
+            <button name="joCurrency" value="JOD" id="joCurrency">JOD</button>
+          </div>
+        </div>
+
+        <!-- chart for the past 20 days prices -->
+        <div>
+          <canvas id="chart" class="chart"></canvas>
+        </div>
+
+        <!-- coins and bar container -->
+        <div class="coins-div animation">
+          <small style="font-size: 0.6rem">COLLECTIBLES</small>
+          <hr />
+          <div class="price-card2">
+            <div>
+              <img src="media/images/rashadi.png" />
+            </div>
+            <div>
+              <h6>Rashadi Coin</h6>
+              <h5 id="rashadiPrice">0.00</h5>
+            </div>
+          </div>
+
+          <div class="price-card2">
+            <div>
+              <img src="media/images/english.png" />
+            </div>
+            <div>
+              <h6>English Coin</h6>
+              <h5 id="EnglishPrice">0.00</h5>
+            </div>
+          </div>
+
+          <div class="price-card2">
+            <div>
+              <img src="media/images/goldBar.jpeg" />
+            </div>
+            <div>
+              <h6>Gold Bar</h6>
+              <h5 id="barPrice">0.00</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- karat display -->
+        <div class="karatPrices animation">
+          <h4 style="color: #cbb271; font-weight: bold">PURITY PRICES</h4>
+          <table>
+            <tr>
+              <td>
+                <!-- <i class="fa-solid fa-diamond" style="color: #ffd166"></i> -->
+                <span style="color: #ffd166; border: 1px solid #cbb271"
+                  >24K</span
+                >
+                Fine Gold
+              </td>
+              <td id="twentyFourPrice">0.00</td>
+            </tr>
+            <tr>
+              <td>
+                <!-- <i class="fa-solid fa-diamond" style="color: #ff6b35"></i> -->
+                <span style="color: #ff6b35; border: 1px solid #ed8e5f"
+                  >21K</span
+                >
+                Jewelry
+              </td>
+              <td id="twentyOnePrice">0.00</td>
+            </tr>
+            <tr>
+              <td>
+                <!-- #d577a1 -->
+                <!-- <i class="fa-solid fa-diamond" style="color: #c2336e"></i> -->
+                <span style="color: #c2336e; border: 1px solid #d577a1"
+                  >18K</span
+                >
+                Classic
+              </td>
+              <td id="eighteenPrice">0.00</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- displaying info about the the assets tab -->
+      <section class="manage-your-assets animation">
+        <img src="media/images/jewelry.png" />
+        <div>
+          <small style="font-size: 0.6rem">PORTFOLIO TRACKER</small>
+          <hr />
+
+          <h3 style="color: #cbb271; font-weight: bold">
+            Manage Your Gold Portfolio
+          </h3>
+          <small>Add you own jewelry, bars and coins.</small><br />
+          <small>Watch your profit grow in real time!</small> <br />
+          <button
+            name="myAssets"
+            value="myAssets"
+            onclick="window.location.href = 'assets.html'"
+          >
+            Add Assets ➡
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>AURUM</span>
+      <span>LIVE GOLD PRICE UPDATED EVERY MINUTE</span>
+    </footer>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="js/home.js"></script>
+  </body>
+</html>

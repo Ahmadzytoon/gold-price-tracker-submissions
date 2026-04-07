@@ -1,0 +1,215 @@
+:root {
+  --sidebar-width: 260px;
+  --card-bg: #111111;
+  --accent-gold: #ffc107;
+  --border-color: rgba(255, 255, 255, 0.05);
+}
+
+body {
+  background-color: #000;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Layout Wrapper */
+#wrapper {
+  min-height: 100vh;
+}
+
+#sidebar-wrapper {
+  width: var(--sidebar-width);
+  background: #000;
+  border-right: 1px solid var(--border-color);
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+main {
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+}
+
+/* Sidebar Elements */
+.sidebar-brand {
+  padding: 2.5rem 1.5rem;
+}
+.profile-bg {
+  background: #1a1a1a;
+}
+.avatar-circle {
+  width: 38px;
+  height: 38px;
+  background: var(--accent-gold);
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #888;
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  transition: 0.3s;
+}
+.nav-link:hover,
+.nav-link.active {
+  background: rgba(255, 193, 7, 0.1);
+  color: var(--accent-gold);
+}
+
+.logout-section {
+  margin-top: auto;
+  padding-bottom: 30px;
+}
+
+/* Dashboard Cards */
+.custom-nav {
+  background: #000;
+  border-bottom: 1px solid var(--border-color);
+}
+.search-box {
+  background: #1a1a1a;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+}
+.stat-label {
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 1px;
+}
+.stat-value {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* Table Styling */
+.inventory-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+.custom-table {
+  --bs-table-bg: transparent;
+}
+.custom-table thead th {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #555;
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+.custom-table td {
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Positive Profit (Green) */
+.profit-pos {
+  color: #2ecc71 !important;
+}
+
+/* Negative Loss (Red) */
+.profit-neg {
+  color: #e63946 !important;
+}
+
+/* Summary Card Profit Text */
+.stat-value.profit-pos {
+  color: #2ecc71;
+}
+.stat-value.profit-neg {
+  color: #e63946;
+}
+
+/* Mobile Compatibility */
+@media (max-width: 768px) {
+  #sidebar-wrapper {
+    transform: translateX(-100%);
+    display: none;
+  }
+  main {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* Container for the Modal */
+#deleteConfirmModal .modal-content {
+  background-color: #121212; /* Deep black-gray to match dashboard */
+  border: 1px solid #333; /* Subtle border */
+  border-radius: 20px; /* Smooth rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* The Warning Icon Wrapper */
+.text-danger i {
+  display: inline-block;
+  padding: 20px;
+  background: rgba(230, 57, 70, 0.1); /* Very faint red glow */
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+/* Modal Typography */
+#deleteConfirmModal h6 {
+  color: #ffffff;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+}
+
+#deleteConfirmModal p {
+  color: #a0a0a0; /* Muted text for description */
+  line-height: 1.5;
+}
+
+/* Button Styling */
+#deleteConfirmModal .btn-sm {
+  padding: 10px 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Cancel Button */
+#deleteConfirmModal .btn-secondary {
+  background-color: #2c2c2c;
+  border: none;
+  color: #fff;
+}
+
+#deleteConfirmModal .btn-secondary:hover {
+  background-color: #3d3d3d;
+}
+
+/* Confirm Delete Button */
+#deleteConfirmModal .btn-danger {
+  background-color: #e63946; /* High-visibility red */
+  border: none;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+}
+
+#deleteConfirmModal .btn-danger:hover {
+  background-color: #ff4d5a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+}
+
+/* Animation for the modal entrance */
+.modal.fade .modal-dialog {
+  transform: scale(0.9);
+  transition: transform 0.2s ease-out;
+}
+
+.modal.show .modal-dialog {
+  transform: scale(1);
+}

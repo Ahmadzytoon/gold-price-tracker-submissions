@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        background-image: url(media/images/Gold_back.png);
+        background-position: center;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background: #1e293b;
+        opacity: 0.8;
+        padding: 40px;
+        border-radius: 15px;
+        width: 350px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      }
+
+      h2 {
+        color: #facc15;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin: 5px 0px;
+        border: none;
+        border-radius: 8px;
+        background: #0f172a;
+        color: white;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #facc15;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #eab308;
+      }
+
+      p {
+        color: #94a3b8;
+        text-align: center;
+      }
+
+      a {
+        color: #facc15;
+        text-decoration: none;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 8px;
+        display: block;
+        box-sizing: border-box;
+      }
+      #gender {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 8px;
+        display: block;
+        box-sizing: border-box;
+        background-color: #0f172a;
+        opacity: 0.8;
+        color: gray;
+        border-color: #0f172a;
+      }
+
+      @media (max-width: 720px) {
+        .container {
+          width: 90%;
+          padding: 20px;
+        }
+
+        .container h2 {
+          font-size: 24px;
+        }
+        .container input {
+          padding: 10px;
+        }
+        .container button {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Register Form</h2>
+
+      <input type="text" placeholder="Username" id="username" />
+      <small id="NameError"></small>
+      <input type="email" placeholder="Email" id="email" />
+      <small id="EmailError"></small>
+      <input type="text" placeholder="Phone Number" id="phone" />
+      <small id="PhoneError"></small>
+      <select id="gender">
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      <small id="GenderError"></small>
+      <input type="password" placeholder="Password" id="password" />
+      <small id="PasswordError"></small>
+
+      <button id="button">Register</button>
+
+      <a href="login.html"
+        ><p>
+          Already have an account?<span style="color: #facc15"> Login</span>
+        </p></a
+      >
+    </div>
+
+    <script>
+      let emailpatren = /^[a-zA-Z0-9.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      let phonepatren = /^\d{10}$/;
+      let genderpatren = /^(male|female)$/i;
+      let passwordpatren = /^(?=.*\d).{6,}$/;
+
+      let nameerror = document.getElementById("NameError");
+      let emailerror = document.getElementById("EmailError");
+      let phoneerror = document.getElementById("PhoneError");
+      let gendererror = document.getElementById("GenderError");
+      let passworderror = document.getElementById("PasswordError");
+
+      let username = document.getElementById("username");
+      let email = document.getElementById("email");
+      let phone = document.getElementById("phone");
+      let gender = document.getElementById("gender");
+      let password = document.getElementById("password");
+      let button = document.getElementById("button");
+
+      button.addEventListener("click", function () {
+        if (username.value == "") {
+          nameerror.textContent = "Username is required";
+          nameerror.style.color = "red";
+        }
+
+        if (email.value == "") {
+          emailerror.textContent = "Email is required";
+          emailerror.style.color = "red";
+        }
+        if (phone.value == "") {
+          phoneerror.textContent = "Phone number is required";
+          phoneerror.style.color = "red";
+        }
+
+        if (gender.value == "") {
+          gendererror.textContent = "Gender is required";
+          gendererror.style.color = "red";
+        }
+        if (password.value == "") {
+          passworderror.textContent = "Password is required";
+          passworderror.style.color = "red";
+        } else if (!emailpatren.test(email.value)) {
+          emailerror.textContent = "Invalid email format";
+          emailerror.style.color = "red";
+        } else if (!phonepatren.test(phone.value)) {
+          phoneerror.textContent = "Invalid phone number format";
+          phoneerror.style.color = "red";
+        } else if (!genderpatren.test(gender.value)) {
+          gendererror.textContent = "Invalid gender format";
+          gendererror.style.color = "red";
+        } else if (!passwordpatren.test(password.value)) {
+          passworderror.innerHTML =
+            "Invalid password format, password must contain: <br>At least one digit. <br>At least 6 characters long. ";
+          passworderror.style.color = "red";
+        } else {
+          let users = JSON.parse(localStorage.getItem("users")) || [];
+
+          const newuser = {
+            username: username.value,
+            email: email.value,
+            phone: phone.value,
+            gender: gender.value,
+            password: hashPassword(password.value),
+          };
+
+          const exists = users.find((u) => u.email === email.value);
+          if (exists) {
+            alert("User with this email already exists");
+          } else {
+            users.push(newuser);
+            localStorage.setItem("users", JSON.stringify(users));
+            window.location.href = "login.html";
+          }
+        }
+      });
+
+      function hashPassword(password) {
+        const shaObj = new jsSHA("SHA-256", "TEXT", { encoding: "UTF8" });
+        shaObj.update(password);
+        return shaObj.getHash("HEX");
+      }
+    </script>
+  </body>
+</html>

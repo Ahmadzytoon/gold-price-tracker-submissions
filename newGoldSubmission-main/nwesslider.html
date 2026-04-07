@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+
+<style>
+    :root {
+  
+  --gold: #c9a84c;
+  --gold-light: #e8cc80;
+  --gold-bright: #f5e49c;
+  --gold-warm: #d4882b;
+  --gold-muted: #8a6e2f;
+  --gold-dim: rgba(201, 168, 76, 0.12);
+
+  --bg: #080608;
+  --bg-card: #0f0d0f;
+  --bg-surface: #131118;
+  --bg-elevated: #1a1720;
+
+  --text: #9c9491;
+  --text-mid: #c8c4bc;
+  --text-bright: #f0ead8;
+
+  --border: rgba(201, 168, 76, 0.18);
+  --border-dim: rgba(255, 255, 255, 0.08);
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Montserrat", "Segoe UI", sans-serif;
+  --font-head: "Playfair Display", Georgia, serif;
+}
+
+  .news-strip {
+  display: flex;
+  align-items: stretch;
+  margin: 18px auto;
+  width: min(96%, 960px);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  height: 52px;
+}
+.news-strip__label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 16px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  border-right: 1px solid var(--border-dim);
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 110px;
+}
+.news-strip__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  animation: pulseGold 1.8s ease-in-out infinite;
+}
+@keyframes pulseGold {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.5);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 0 5px rgba(201, 168, 76, 0);
+  }
+}
+
+/* Swiper inside news strip */
+.news-swiper {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  height: 52px;
+}
+.news-swiper.swiper {
+  margin: 0;
+  width: 100%;
+  height: 52px;
+  border-radius: 0;
+  background: transparent;
+}
+.news-swiper .swiper-wrapper {
+  height: 52px;
+  align-items: center;
+}
+.news-swiper .swiper-button-next,
+.news-swiper .swiper-button-prev {
+  display: none;
+}
+
+.swiper-slide {
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  height: 52px !important;
+  width: auto !important;
+}
+.content {
+  padding: 0 24px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.content h3 {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-mid);
+  margin: 0;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 600px;
+}
+.lable {
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-right: 8px;
+  text-transform: uppercase;
+}
+
+
+
+
+
+</style>
+
+
+</head>
+<body>
+ <div class="news-strip">
+      <div class="news-strip__label">
+        <span class="news-strip__dot"></span>
+        <h5>LIVE NEWS </h5> 
+      </div>
+      <div class="swiper news-swiper">
+        <div class="swiper-wrapper" id="news"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+
+
+
+
+    <script>
+
+ let news= document.getElementById("news");
+  let savedNews = JSON.parse(localStorage.getItem("newsData")) || [];
+  let lastFetchTim= parseInt(localStorage.getItem("newsTime")) || 0;
+let  data =Date.now();
+
+if(savedNews.length > 0 && lastFetchTim && data - lastFetchTim < 600000){
+    displayNews(savedNews);
+}
+
+
+else{
+
+
+   fetch ("https://newsdata.io/api/1/latest?apikey=pub_8cdfe34522554af9bab8604d4a8294f9&q=economy OR politics&language=en")
+   
+    .then(res => res.json())
+        .then(data => {
+let articles = data.results ? data.results.slice(0,10) : [];            localStorage.setItem("newsData", JSON.stringify(articles));
+            localStorage.setItem("newsTime",date.now() );
+ 
+
+            displayNews(articles);
+        })
+    .catch(() => {
+        console.log("API Error");
+   
+   if(savedNews.length > 0){
+        displayNews(savedNews);
+    }
+})
+}
+ function displayNews(articles){
+    
+    news.innerHTML = "";
+    
+      
+ articles.forEach(element => {
+    
+      let div =document.createElement("div");
+      div.classList.add("swiper-slide");
+        div.innerHTML = `
+        <div class="content">
+            <h3> <label class="lable" > Latest News | </label> ${element.title}</h3>
+        </div>
+        `
+
+  div.addEventListener("click", () => {
+    window.open(element.link, "_blank");
+  });
+
+          news.appendChild(div);
+
+ });
+
+    
+ }
+  
+new Swiper(".swiper",{
+    loop:false,
+    freeMode: true,
+
+   slidesPerView: "auto",
+  spaceBetween: 50,
+     speed: 800,
+
+    autoplay: { 
+        delay: 4000,
+        disableOnInteraction: false,
+    },
+
+    pagination:({
+        el:".swiper-pagination",
+        clickable:true,
+    })
+
+,
+navigation:{
+
+nextEl:".swiper-button-next",
+prevEl:".swiper-button-prev",
+
+}
+
+
+
+})
+
+
+
+
+      
+
+
+    </script>
+    
+</body>
+</html>
