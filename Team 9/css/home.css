@@ -1,0 +1,410 @@
+.news-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.news-title-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+.news-card {
+  background: linear-gradient(145deg, var(--surface) 0%, var(--bg-2) 100%);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition:
+    border-color 0.3s,
+    transform 0.25s;
+}
+
+.news-card:hover {
+  border-color: rgba(201, 138, 106, 0.3);
+  transform: translateY(-3px);
+}
+
+.news-card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background-color: var(--surface-2);
+  display: block;
+}
+
+.news-card-body {
+  padding: 16px 18px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.news-source {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  text-transform: uppercase;
+  background: var(--gold-glow);
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(201, 138, 106, 0.2);
+  white-space: nowrap;
+}
+
+.news-date {
+  font-size: 10px;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+.news-card-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.news-card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 14px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--gold);
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    gap 0.2s;
+}
+
+.news-card-link:hover {
+  color: var(--gold-light);
+  gap: 8px;
+}
+
+.news-card-skeleton {
+  background: linear-gradient(145deg, var(--surface) 0%, var(--bg-2) 100%);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  height: 320px;
+  opacity: 0.5;
+}
+
+.price-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.price-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+
+  opacity: 0.6;
+}
+
+.price-card:hover {
+  border-color: rgba(201, 138, 106, 0.25);
+}
+
+.price-card h6 {
+  color: white;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.price-card h2 {
+  color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 42px;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  margin: 10px 0 4px;
+  line-height: 1;
+}
+
+.price-card #ounce-price-sub {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.price-card #last-updated {
+  color: white;
+  font-size: 10px;
+  letter-spacing: 0.3px;
+}
+
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-card h6 {
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.rates-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+.rate-card {
+  background: var(--surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 12px;
+  padding: 18px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+.rate-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    var(--gold-glow),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.rate-card:hover {
+  border-color: rgba(201, 138, 106, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.rate-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.rate-value {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.rate-card small {
+  color: white;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-top: 4px;
+}
+
+.assets-promo {
+  background: linear-gradient(145deg, var(--surface) 0%, var(--bg-2) 100%);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 52px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.assets-promo::before {
+  content: "";
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 200px;
+  background: radial-gradient(
+    ellipse,
+    rgba(201, 138, 106, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.assets-promo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gold) 30%,
+    var(--gold-light) 50%,
+    var(--gold) 70%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+.assets-promo h4 {
+  color: var(--text);
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: 30px;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.assets-promo .text-muted {
+  color: white;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+}
+
+.promo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.promo-icon {
+  font-size: 32px;
+  width: 64px;
+  height: 64px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+
+.promo-item:hover .promo-icon {
+  border-color: var(--gold-dim);
+  background: var(--gold-glow);
+  transform: translateY(-3px);
+}
+
+.divider-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-dim),
+    transparent
+  );
+  margin: 8px 0;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.price-card,
+.chart-card,
+.rate-card,
+.assets-promo {
+  animation: fadeSlideUp 0.5s ease both;
+}
+
+.rate-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.rate-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.rate-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.rate-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.rate-card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.rate-card:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .price-card h2 {
+    font-size: 32px;
+  }
+
+  .assets-promo {
+    padding: 36px 24px;
+  }
+
+  .assets-promo h4 {
+    font-size: 24px;
+  }
+}

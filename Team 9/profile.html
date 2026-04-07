@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - Gold Tracker</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪙</text></svg>"
+    />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <span class="logo-icon"
+            ><img src="./assets/rashadi.png" style="width: 30px"
+          /></span>
+          Gold Tracker
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="prices.html">Gold Prices</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="assets.html">My Assets</a>
+            </li>
+            <li class="nav-item ms-lg-3" id="nav-login">
+              <a
+                class="btn btn-warning btn-sm px-4 rounded-pill shadow-sm"
+                href="login.html"
+                style="
+                  letter-spacing: 0.5px;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 6px;
+                "
+              >
+                Login
+                <span aria-hidden="true" style="font-size: 14px; line-height: 1"
+                  >&rarr;</span
+                >
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="profile.html"
+                class="nav-link text-warning fw-bold active"
+                id="nav-username"
+                style="display: none"
+              ></a>
+            </li>
+            <li class="nav-item">
+              <button
+                class="btn btn-sm btn-outline-warning ms-2"
+                id="nav-logout"
+                style="display: none"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5 mb-5">
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <div class="auth-card">
+            <h3 class="text-center mb-4">My Profile Settings</h3>
+
+            <div
+              class="mb-4 p-3 rounded-3"
+              style="
+                background: rgba(201, 180, 106, 0.07);
+                border: 1px solid rgba(201, 180, 106, 0.2);
+              "
+            >
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <span
+                  style="
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    color: var(--gold, #c9b46a);
+                    font-weight: 600;
+                  "
+                  >Account ID</span
+                >
+              </div>
+              <code
+                id="prof-user-id"
+                style="font-size: 12px; color: #aaa; word-break: break-all"
+                >Loading...</code
+              >
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="prof-name" class="field" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input type="text" id="prof-phone" class="field" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input
+                type="email"
+                id="prof-email"
+                class="field"
+                readonly
+                style="opacity: 0.6; cursor: not-allowed"
+                title="Email cannot be changed"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Old Password</label>
+              <input
+                type="password"
+                id="prof-old-password"
+                class="field"
+                placeholder="Enter current password to change it"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">New Password</label>
+              <input
+                type="password"
+                id="prof-password"
+                class="field"
+                placeholder="Leave blank to keep your current password"
+              />
+              <div class="form-check mt-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="show-prof-password"
+                />
+                <label
+                  class="form-check-label text-white-50"
+                  for="show-prof-password"
+                  style="font-size: 13px"
+                >
+                  Show Passwords
+                </label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Gender</label>
+              <select id="prof-gender" class="field">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            <div
+              id="prof-error"
+              class="text-danger mb-3"
+              style="display: none"
+            ></div>
+            <div
+              id="prof-success"
+              class="text-success mb-3"
+              style="display: none"
+            ></div>
+
+            <button class="btn btn-warning w-100" id="prof-save-btn">
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>

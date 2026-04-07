@@ -1,0 +1,23 @@
+.auth-card {
+  background-color: #1c1923;
+  border: 1px solid #2a2435;
+  border-radius: 12px;
+  padding: 36px 32px;
+  margin-top: 20px;
+}
+
+.auth-card h3 {
+  color: #c98a6a;
+}
+
+.auth-card .form-label {
+  color: #9a9498;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 576px) {
+  .auth-card {
+    padding: 24px 18px;
+  }
+}

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gold Prices - Gold Tracker</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪙</text></svg>"
+    />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/prices.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <span class="logo-icon"
+            ><img src="./assets/rashadi.png" style="width: 30px"
+          /></span>
+          Gold Tracker
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link active" href="prices.html">Gold Prices</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="assets.html">My Assets</a>
+            </li>
+            <li class="nav-item ms-lg-3" id="nav-login">
+              <a
+                class="btn btn-warning btn-sm px-4 rounded-pill shadow-sm"
+                href="login.html"
+                style="
+                  letter-spacing: 0.5px;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 6px;
+                "
+              >
+                Login
+                <span aria-hidden="true" style="font-size: 14px; line-height: 1"
+                  >&rarr;</span
+                >
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="profile.html"
+                class="nav-link text-warning"
+                id="nav-username"
+                style="display: none"
+              ></a>
+            </li>
+            <li class="nav-item">
+              <button
+                class="btn btn-sm btn-outline-warning ms-2"
+                id="nav-logout"
+                style="display: none"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">Live Gold Prices</h4>
+        <button class="btn btn-outline-warning btn-sm" id="currency-toggle">
+          USD
+        </button>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-12">
+          <div class="ounce-card">
+            <div>
+              <div class="small">Gold Ounce (XAU)</div>
+              <h2 id="price-ounce">Loading...</h2>
+              <small class="last-updated"></small>
+            </div>
+            <div class="ounce-icon">🏅</div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <h5 class="section-title">Gold by Karat</h5>
+        </div>
+
+        <div class="col-md-4">
+          <div class="price-card">
+            <div class="karat-badge">24K</div>
+            <div class="price-value" id="price-24k">-</div>
+            <div class="price-sub">per gram · Pure Gold</div>
+            <small class="last-updated"></small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="price-card">
+            <div class="karat-badge">21K</div>
+            <div class="price-value" id="price-21k">-</div>
+            <div class="price-sub">per gram · 87.5% Pure</div>
+            <small class="last-updated"></small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="price-card">
+            <div class="karat-badge">18K</div>
+            <div class="price-value" id="price-18k">-</div>
+            <div class="price-sub">per gram · 75% Pure</div>
+            <small class="last-updated"></small>
+          </div>
+        </div>
+
+        <div class="col-12 mt-2">
+          <h5 class="section-title">Gold Coins & Bars</h5>
+        </div>
+
+        <div class="col-md-4">
+          <div class="price-card coin-card">
+            <div class="coin-icon">🪙</div>
+            <div class="coin-name">Rashadi Coin</div>
+            <div class="price-value" id="price-rashadi">-</div>
+            <div class="price-sub">8.544g · 21K</div>
+            <small class="last-updated"></small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="price-card coin-card">
+            <div class="coin-icon">🪙</div>
+            <div class="coin-name">English Coin</div>
+            <div class="price-value" id="price-english">-</div>
+            <div class="price-sub">7.9881g · 22K</div>
+            <small class="last-updated"></small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="price-card coin-card">
+            <div class="coin-icon">🟨</div>
+            <div class="coin-name">Gold Bar</div>
+            <div class="price-value" id="price-bar">-</div>
+            <div class="price-sub">116.64g · 24K</div>
+            <small class="last-updated"></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/gold.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/prices.js"></script>
+  </body>
+</html>
