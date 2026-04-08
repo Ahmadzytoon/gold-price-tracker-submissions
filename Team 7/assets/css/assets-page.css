@@ -1,0 +1,46 @@
+/* ============================================================
+   assets-page.css — Assets page only styles
+   ============================================================ */
+
+header nav.navbar,
+header aside {
+    background-color: var(--bg-card);
+}
+
+header nav.navbar {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Aside */
+header aside {
+    min-height: 40rem;
+    border-right: 1px solid var(--border-color);
+}
+
+/* Filter bar */
+header .filter-bar {
+    background-color: var(--bg-card);
+    width: 98%;
+    border: 1px solid var(--border-color);
+    color: var(--text-gray);
+}
+
+header .filter-bar input::placeholder { color: var(--text-gray) !important; font-size: .85rem; }
+header .filter-bar input.form-control { border-color: var(--border-color); color: var(--text-gray); }
+header .filter-bar i { top: 30%; left: 2%; }
+header .filter-bar input.form-control:focus { box-shadow: none !important; outline: none !important; }
+header .filter-bar select {
+    background-color: var(--bg-card);
+    border-color: var(--border-color) !important;
+    color: var(--text-gray);
+    font-size: .8rem;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .nav-item .nav-link { width: fit-content; }
+    .navbar-collapse .navbar-nav:first-child .nav-link::after { bottom: 0; }
+    header .filter-bar select { margin: auto !important; }
+}

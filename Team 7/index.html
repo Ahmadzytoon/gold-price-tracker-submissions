@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track live gold prices, market trends, and news in real-time. Your premium gold market dashboard.">
+    <link rel="shortcut icon" href="assets/img/logo.webp" type="image/x-icon">
+    <title>24K | Home</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Homepage-specific styles -->
+    <link rel="stylesheet" href="assets/css/home.css">
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <img src="assets/img/logo.webp" alt="24K logo" class="loader-logo">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark py-3">
+        <div class="container-fluid d-flex align-items-center">
+            <a class="navbar-brand fw-bold d-lg-none me-auto" href="index.html">24K GOLD</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item me-2"><a class="nav-link page" href="index.html">Home</a></li>
+                    <li class="nav-item me-2"><a class="nav-link page" href="pages/assets.html">My Assets</a></li>
+                </ul>
+
+                <a class="navbar-brand mx-auto fw-bold d-none d-lg-block" href="index.html">24K GOLD</a>
+
+                <ul class="navbar-nav ms-auto d-flex flex-row align-items-center gap-2 me-lg-4">
+                    <li class="nav-item">
+                        <button class="currency-toggle-btn" id="currency-toggle">Switch to JOD</button>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a class="nav-link" href="#" id="theme-toggle">
+                            <i class="fa-solid fa-circle-half-stroke fs-5"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="logBtn btn" href="pages/login-register.html" id="authBtn">Log in</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page wrapper -->
+    <div class="page-wrapper">
+
+        <!-- News aside -->
+        <aside class="news-aside">
+            <p class="section-label"><i class="fa-solid fa-globe"></i> Market News</p>
+            <div id="news-container">
+                <div class="news-loading">
+                    <i class="fa-solid fa-spinner fa-spin mb-2 d-block fs-4"></i>
+                    Loading news...
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+
+            <!-- Hero price banner -->
+            <div class="hero-banner">
+                <div>
+                    <p class="hero-label"><i class="fa-solid fa-coins me-1"></i> XAU / USD Live Price</p>
+                    <p class="hero-price">
+                        <span id="hero-price-val">—</span>
+                        <span class="hero-currency" id="hero-currency">USD</span>
+                    </p>
+                    <p class="hero-change" id="hero-change">Loading...</p>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <p class="hero-stat-label">English Lira</p>
+                        <p class="hero-stat-value" id="stat-english">—</p>
+                    </div>
+                    <div class="hero-stat">
+                        <p class="hero-stat-label">Rashadi Lira</p>
+                        <p class="hero-stat-value" id="stat-rashadi">—</p>
+                    </div>
+                    <div class="hero-stat">
+                        <p class="hero-stat-label">Last Updated</p>
+                        <p class="hero-stat-value" id="stat-time">—</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <p class="section-label mb-0">
+                        <i class="fa-solid fa-chart-line"></i> XAU / USD Market Trend (Today)
+                    </p>
+                    <div class="last-updated">
+                        <span class="live-dot"></span>
+                        <span>Live</span>
+                    </div>
+                </div>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="goldChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Rate cards -->
+            <div class="rates-grid">
+                <div class="rate-card">
+                    <p class="rate-card-label">24K / gram</p>
+                    <p class="rate-card-value" id="rate-24k">—<span class="rate-card-currency">USD</span></p>
+                    <p class="trend-flat" id="trend-24k">—</p>
+                </div>
+                <div class="rate-card">
+                    <p class="rate-card-label">21K / gram</p>
+                    <p class="rate-card-value" id="rate-21k">—<span class="rate-card-currency">USD</span></p>
+                    <p class="trend-flat" id="trend-21k">—</p>
+                </div>
+                <div class="rate-card">
+                    <p class="rate-card-label">18K / gram</p>
+                    <p class="rate-card-value" id="rate-18k">—<span class="rate-card-currency">USD</span></p>
+                    <p class="trend-flat" id="trend-18k">—</p>
+                </div>
+                <div class="rate-card">
+                    <p class="rate-card-label">22K / gram</p>
+                    <p class="rate-card-value" id="rate-22k">—<span class="rate-card-currency">USD</span></p>
+                    <p class="trend-flat" id="trend-22k">—</p>
+                </div>
+                <div class="rate-card">
+                    <p class="rate-card-label">English Lira</p>
+                    <p class="rate-card-value" id="rate-english">—<span class="rate-card-currency">USD</span></p>
+                    <p class="trend-flat" id="trend-english">—</p>
+                </div>
+                <div class="rate-card">
+                    <p class="rate-card-label">Rashadi Lira</p>
+                    <p class="rate-card-value" id="rate-rashadi">—<span class="rate-card-currency">USD</span></p>
+                    <p class="trend-flat" id="trend-rashadi">—</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p class="pt-2 pb-1">&copy;2026
+            <a href="https://www.linkedin.com/in/leen-saleh/" target="_blank">Leen</a>,
+            <a href="https://www.linkedin.com/in/lujain-majid/" target="_blank">Lujain</a> &
+            <a href="https://www.linkedin.com/in/zaidalkhalili/" target="_blank">Zaid</a>.
+            All rights reserved.
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/gold.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/home.js"></script>
+</body>
+</html>

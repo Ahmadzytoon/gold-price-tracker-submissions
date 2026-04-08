@@ -1,0 +1,210 @@
+/* ============================================================
+   home.css — Homepage-only styles
+   ============================================================ */
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.page-wrapper {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: calc(100vh - 62px);
+}
+
+/* ── News aside ─────────────────────────────────────────────── */
+.news-aside {
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border-color);
+    padding: 1.5rem 1rem;
+    min-height: calc(100vh - 62px);
+}
+
+.section-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--gold-primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.news-item {
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.85rem 0.5rem;
+    cursor: pointer;
+    transition: background .3s, padding-left .3s;
+    border-radius: 8px;
+}
+
+.news-item:hover { background: rgba(212,175,55,0.05); padding-left: 1rem; }
+
+.news-item-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+}
+
+.news-item-meta { display: flex; justify-content: space-between; align-items: center; }
+.news-source { font-size: 0.7rem; color: var(--text-gray); }
+.news-time   { font-size: 0.65rem; color: var(--text-gray); }
+
+.news-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    padding: 1px 6px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.badge-live {
+    background: rgba(231,76,60,0.15);
+    color: #e74c3c;
+    border: 1px solid rgba(231,76,60,0.4);
+    animation: blink 1.2s infinite;
+}
+
+.badge-new {
+    background: rgba(212,175,55,0.15);
+    color: var(--gold-primary);
+    border: 1px solid rgba(212,175,55,0.4);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+}
+
+.news-loading { text-align: center; color: var(--text-gray); font-size: .8rem; padding: 2rem 0; }
+
+/* ── Main content ───────────────────────────────────────────── */
+.main-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* ── Hero banner ────────────────────────────────────────────── */
+.hero-banner {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.hero-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--gold-primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+}
+
+.hero-price {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: var(--text-white);
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: .4rem;
+}
+
+.hero-currency {
+    font-size: 1rem;
+    color: var(--gold-primary);
+    font-weight: 600;
+}
+
+.hero-change { font-size: .85rem; font-weight: 600; margin-top: .4rem; }
+.hero-change.up   { color: var(--profit, #2ecc71); }
+.hero-change.down { color: var(--loss, #e74c3c); }
+
+.hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat-label { font-size: .7rem; color: var(--text-gray); margin-bottom: .2rem; text-transform: uppercase; letter-spacing: 1px; }
+.hero-stat-value { font-size: 1rem; font-weight: 700; color: var(--text-white); }
+
+/* ── Chart card ─────────────────────────────────────────────── */
+.chart-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.chart-canvas-wrapper { height: 260px; }
+
+.last-updated { font-size: .68rem; color: var(--text-gray); display: flex; align-items: center; gap: .3rem; }
+
+.live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--profit, #2ecc71);
+    display: inline-block;
+    animation: blink 1.2s infinite;
+}
+
+/* ── Rate cards ─────────────────────────────────────────────── */
+.rates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.rate-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.1rem 1rem;
+    transition: border-color .4s, transform .4s, background .4s;
+    cursor: default;
+}
+
+.rate-card:hover {
+    border-color: var(--gold-primary);
+    transform: translateY(-4px);
+    background: rgba(212,175,55,0.04);
+}
+
+.rate-card-label { font-size: .7rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: .4rem; }
+.rate-card-value { font-size: 1.3rem; font-weight: 700; color: var(--text-white); margin-bottom: .2rem; }
+.rate-card-currency { font-size: .7rem; color: var(--gold-primary); margin-left: 3px; }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 991.98px) {
+    .page-wrapper { grid-template-columns: 1fr; }
+    .news-aside { min-height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
+}
+
+@media (max-width: 767.98px) {
+    .nav-item .nav-link { width: fit-content; }
+    .navbar-collapse .navbar-nav:first-child .nav-link::after { bottom: 0; }
+}
+
+@media (max-width: 575.98px) {
+    .hero-price { font-size: 2rem; }
+    .hero-stats { gap: 1rem; }
+    .main-content { padding: 1rem; }
+    .hero-banner { padding: 1rem; }
+    .rates-grid { grid-template-columns: repeat(2, 1fr); }
+}
