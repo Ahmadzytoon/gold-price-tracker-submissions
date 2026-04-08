@@ -1,0 +1,196 @@
+.ounce-card {
+  background: linear-gradient(145deg, var(--surface) 0%, var(--bg-2) 100%);
+  border: 1px solid var(--gold);
+  border-radius: 16px;
+  padding: 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeSlideUp 0.5s ease both;
+}
+
+.ounce-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.8;
+}
+
+.ounce-card::after {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -20px;
+  width: 200px;
+  height: 200px;
+  
+  pointer-events: none;
+}
+
+.ounce-card .small {
+  color: var(--text-muted);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.ounce-card h2 {
+  color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 48px;
+  font-weight: 300;
+  margin: 10px 0 6px;
+  letter-spacing: -0.5px;
+}
+
+.ounce-icon {
+  font-size: 64px;
+  filter: drop-shadow(0 0 15px var(--gold-glow));
+}
+
+.section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  margin-top: 10px;
+  margin-bottom: 0;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+ 
+}
+
+.price-card {
+  background: var(--surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: default;
+  animation: fadeSlideUp 0.5s ease both;
+  height: 100%;
+}
+
+.price-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.price-card:hover {
+  border-color: rgba(201, 138, 106, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.price-card:hover::after {
+  opacity: 1;
+}
+
+.karat-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 11px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 10px rgba(201, 138, 106, 0.2);
+}
+
+.price-value {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--gold);
+  margin: 10px 0;
+  letter-spacing: 0.5px;
+}
+
+.price-sub {
+  font-size: 11px;
+  color: white;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.coin-card .coin-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.price-card:hover .coin-icon {
+  transform: scale(1.1) translateY(-2px);
+}
+
+.coin-card .coin-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.last-updated {
+  color: white;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.col-md-4:nth-child(3) .price-card { animation-delay: 0.1s; }
+.col-md-4:nth-child(4) .price-card { animation-delay: 0.15s; }
+.col-md-4:nth-child(5) .price-card { animation-delay: 0.2s; }
+.col-md-4:nth-child(7) .price-card { animation-delay: 0.25s; }
+.col-md-4:nth-child(8) .price-card { animation-delay: 0.3s; }
+.col-md-4:nth-child(9) .price-card { animation-delay: 0.35s; }
+
+@media (max-width: 768px) {
+  .ounce-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 24px;
+  }
+
+  .ounce-card h2 {
+    font-size: 36px;
+  }
+}
