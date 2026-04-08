@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="darkMode.js" defer></script>
+
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gold Tracker</h1>
+        <div class="btns-header">
+            <button>Login</button>
+            <button>Sign Up</button>
+        </div>
+        <div class="content">
+            <form id="registerForm">
+                <label>Name</label>
+                <input type="text" id="name" class="fields" placeholder="Enter Your Name">
+                <small class="error"></small>
+
+                <label>Email</label>
+                <input type="email" id="email" class="fields" placeholder="name@luxury-investor.com">
+                <small class="error"></small>
+
+                <label>Phone</label>
+                <input type="text" id="phone" class="fields" placeholder="Enter Your Number">
+                <small class="error"></small>
+
+                <div class="gender">
+                    <label>Gender: </label>
+                    <input type="radio" name="gender" value="male">
+                    <label>Male</label>
+                    <input type="radio" name="gender" value="female">
+                    <label>Female</label>
+                    <small class="error"></small>
+                </div>
+
+                <label>Password</label>
+                <input type="password" id="password" class="fields" placeholder="Enter Complex Password">
+                <small class="error"></small>
+
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPassword" class="fields" placeholder="Confirm Password">
+                <small class="error"></small>
+
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+        
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html>

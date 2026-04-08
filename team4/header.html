@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/home.css">
+  <title>Header</title>
+  <style>
+
+    /* ── CSS Variables: Light (default) ── */
+    :root {
+      --header-bg:      rgba(213, 185, 148, 0.92);
+      --header-border:  rgba(103, 64, 25, 0.28);
+      --header-shadow:  rgba(103, 64, 25, 0.15);
+      --nav-text:       #3b2009;
+      --nav-hover:      #674019;
+      --login-text:     #674019;
+      --login-hover-bg: rgba(103, 64, 25, 0.08);
+      --toggle-bg:      rgba(103, 64, 25, 0.10);
+      --toggle-text:    #674019;
+      --toggle-border:  rgba(103, 64, 25, 0.30);
+    }
+
+    /* ── Dark mode variable overrides ── */
+    body.dark-mode {
+      --header-bg:      rgba(22, 14, 6, 0.97);
+      --header-border:  rgba(212, 168, 67, 0.20);
+      --header-shadow:  rgba(0, 0, 0, 0.50);
+      --nav-text:       #e8d5b0;
+      --nav-hover:      #d4a843;
+      --login-text:     #d4a843;
+      --login-hover-bg: rgba(212, 168, 67, 0.10);
+      --toggle-bg:      rgba(212, 168, 67, 0.10);
+      --toggle-text:    #d4a843;
+      --toggle-border:  rgba(212, 168, 67, 0.30);
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+      background-color: var(--header-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--header-border);
+      box-shadow: 0 2px 16px var(--header-shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: background-color 0.35s, border-color 0.35s, box-shadow 0.35s;
+    }
+
+    .logo { display: flex; align-items: center; }
+    .logo img { width: 160px; height: auto; display: block; transition: opacity 0.2s; }
+
+    #nav-bar nav ul {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0; padding: 0;
+      list-style: none;
+    }
+    #nav-bar nav ul li a {
+      display: block;
+      padding: 6px 14px;
+      text-decoration: none;
+      color: var(--nav-text);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.4px;
+      transition: color 0.2s, border-color 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    #nav-bar nav ul li a:hover,
+    #nav-bar nav ul li a.active {
+      color: var(--nav-hover);
+      border-bottom: 2px solid var(--nav-hover);
+    }
+
+    #header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #buttons { display: flex; align-items: center; }
+
+    #login-btn {
+      padding: 8px 18px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    #login-btn a {
+      text-decoration: none;
+      color: var(--login-text);
+      font-weight: 700;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    #login-btn:hover { background-color: var(--login-hover-bg); }
+
+    #Register-btn {
+      padding: 8px 18px;
+      background: linear-gradient(135deg, #d4a843, #b8862a);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    #Register-btn a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.4px;
+    }
+    #Register-btn:hover {
+      background: linear-gradient(135deg, #e0b84e, #c99330);
+      box-shadow: 0 4px 16px rgba(180, 130, 40, 0.3);
+      transform: translateY(-1px);
+    }
+
+    /* ── Theme Toggle ── */
+    #theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      background: var(--toggle-bg);
+      border: 1px solid var(--toggle-border);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: var(--toggle-text);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    #theme-toggle:hover {
+      background: var(--login-hover-bg);
+      border-color: var(--nav-hover);
+    }
+    #theme-toggle .toggle-icon {
+      font-size: 15px;
+      line-height: 1;
+      transition: transform 0.4s ease;
+    }
+    body.dark-mode #theme-toggle .toggle-icon { transform: rotate(20deg); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      header { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
+      .logo img { width: 120px; }
+      #nav-bar nav ul { gap: 2px; flex-wrap: wrap; justify-content: center; }
+      #nav-bar nav ul li a { font-size: 12px; padding: 5px 10px; }
+      #login-btn, #Register-btn { padding: 6px 12px; }
+      #login-btn a, #Register-btn a { font-size: 12px; }
+      #theme-toggle { font-size: 12px; padding: 6px 11px; }
+    }
+    @media (max-width: 480px) {
+      header { flex-direction: column; align-items: center; padding: 12px; }
+      .logo img { width: 100px; }
+      #nav-bar nav ul { justify-content: center; }
+      #header-right { width: 100%; justify-content: center; }
+      #login-btn, #Register-btn { flex: 1; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="/media/logo.png" alt="Gold Tracker" />
+    </div>
+
+    <div id="nav-bar">
+      <nav>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a id="asset-link" href="/login.html">My Assets</a></li>
+          <li><a href="/news.html">News</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div id="header-right">
+      <button id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="toggle-icon">🌙</span>
+        <span class="toggle-label">Dark</span>
+      </button>
+
+    <div id="buttons">
+      <button id="login-btn"><a href="login.html">Login</a></button>
+      <button id="Register-btn"><a href="register.html">Register</a></button>
+    </div>
+  </header>
+ 
+</body>
+</html>
